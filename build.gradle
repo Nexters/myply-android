@@ -5,6 +5,9 @@ buildscript {
         hilt_version = "2.40.5"
         room_version = "2.4.2"
         moshi_version = "1.13.0"
+        material_version = "1.5.0"
+        nav_version = "2.4.0"
+        fragment_version = "1.5.0"
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

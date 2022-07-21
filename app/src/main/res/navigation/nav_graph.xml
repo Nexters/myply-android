@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.cocaine.myply.feature.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.cocaine.myply.feature.ui.mypage.MyPageFragment"
+        android:label="MyPageFragment" />
+    <fragment
+        android:id="@+id/playListFragment"
+        android:name="com.cocaine.myply.feature.ui.playlist.PlayListFragment"
+        android:label="PlayListFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.cocaine.myply.feature.ui.search.SearchFragment"
+        android:label="SearchFragment" />
+</navigation>
