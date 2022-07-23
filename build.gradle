@@ -8,6 +8,8 @@ buildscript {
         material_version = "1.5.0"
         nav_version = "2.4.0"
         fragment_version = "1.5.0"
+        glide_version = "4.13.2"
+        logging_intercepter ="4.10.0"
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
