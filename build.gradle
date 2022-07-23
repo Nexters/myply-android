@@ -10,6 +10,7 @@ buildscript {
         fragment_version = "1.5.0"
         glide_version = "4.13.2"
         logging_intercepter ="4.10.0"
+        coroutine_version = "1.6.0"
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
