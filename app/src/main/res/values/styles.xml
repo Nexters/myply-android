@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Design System Typography  -->
+    <!--  H1  -->
+    <style name="H1_Bold">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="H1_Semibold">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="H1_Medium">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!--  H2  -->
+    <style name="H2_Bold">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="H2_Semibold">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="H2_Medium">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!--  H3  -->
+    <style name="H3_Bold">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="H3_Semibold">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="H3_Medium">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!--  H4  -->
+    <style name="H4_Bold">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="H4_Semibold">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="H4_Medium">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--  H5  -->
+    <style name="H5_Bold">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="H5_Semibold">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="H5_Medium">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--  H6  -->
+    <style name="H6_Bold">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="H6_Semibold">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="H6_Medium">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>
