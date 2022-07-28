@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@color/beige">
+
+        <TextView
+            android:id="@+id/keep_page_title"
+            style="@style/H1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="@string/keep"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/keep_page_subtitle"
+            style="@style/H5_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{@string/keep_count(5)}"
+            android:textColor="@color/gray_60"
+            app:layout_constraintTop_toBottomOf="@id/keep_page_title"
+            tools:text="뮤직 폴라로이드 5개"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="31dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keep_page_subtitle"
+            tools:listitem="@layout/item_keep" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

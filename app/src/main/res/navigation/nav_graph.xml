@@ -19,4 +19,9 @@
         android:id="@+id/searchFragment"
         android:name="com.cocaine.myply.feature.ui.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/keepFragment"
+        android:name="com.cocaine.myply.feature.ui.keep.KeepFragment"
+        android:label="KeepFragment" />
+
 </navigation>

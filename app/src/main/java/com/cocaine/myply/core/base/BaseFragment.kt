@@ -18,6 +18,7 @@ abstract class BaseFragment<T : ViewDataBinding>(private val resId: Int) : Fragm
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, resId, container, false)
+        binding?.lifecycleOwner = viewLifecycleOwner
 
         return binding?.root
     }
