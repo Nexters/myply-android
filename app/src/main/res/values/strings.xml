@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyPly</string>
+    <string name="keep">보관함</string>
+    <style name="keep_count">뮤직 폴라로이드 %d개</style>
 </resources>
