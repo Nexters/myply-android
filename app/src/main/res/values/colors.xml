@@ -5,6 +5,35 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!--  Primary  -->
+    <color name="primary_green_basic">#4B5B55</color>
+    <color name="primary_green_dark">#34403C</color>
+    <color name="primary_green_light">#81978B</color>
+
+    <!--  Secondary  -->
+    <color name="secondary_red">#E08870</color>
+    <color name="secondary_yellow">#F3C874</color>
+    <color name="secondary_butter">#F6ECC9</color>
+    <color name="secondary_brown">#8F8582</color>
+    <color name="secondary_blue">#8CB1EC</color>
+
+    <!--  Gray Scale  -->
+    <color name="gray_10">#FAFAFC</color>
+    <color name="gray_20">#F5F6FA</color>
+    <color name="gray_30">#E5E7EC</color>
+    <color name="gray_40">#CBCFD7</color>
+    <color name="gray_50">#ACB2BF</color>
+    <color name="gray_60">#828895</color>
+    <color name="gray_70">#5E6471</color>
+    <color name="gray_80">#424957</color>
+    <color name="gray_90">#303642</color>
+    <color name="gray_100">#111723</color>
+
+    <!--  Black & White  -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!--  Background  -->
+    <color name="beige">#F7F6F2</color>
 </resources>
