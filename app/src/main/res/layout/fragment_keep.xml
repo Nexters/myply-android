@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/keep_page_subtitle"
-            style="@style/H5_Semibold"
+            style="@style/Body2_Semibold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{@string/keep_count(5)}"
