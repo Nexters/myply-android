@@ -96,4 +96,18 @@
         <item name="android:fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <!--  Custom Style  -->
+
+    <!--  Chip Button  -->
+    <style name="MyPly.Chip.Home" parent="Widget.Material3.Chip.Suggestion">
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="chipCornerRadius">0dp</item>
+        <item name="android:textAppearance">@style/Body2_Bold</item>
+        <item name="android:textColor">@color/text_home_chip</item>
+        <item name="chipBackgroundColor">@color/bg_home_chip</item>
+        <item name="chipStrokeColor">@color/bg_home_chip</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
 </resources>
