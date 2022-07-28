@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="video"
+            type="com.cocaine.myply.feature.data.model.VideoResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +22,7 @@
             android:id="@+id/playlist_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:update_image="@{video.thumbnailURL}"
             app:layout_constraintBottom_toTopOf="@id/playlist_title"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +34,7 @@
             android:layout_marginTop="15dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{video.title}"
             android:textColor="@color/gray_80"
             app:layout_constraintTop_toBottomOf="@id/playlist_thumbnail"
             tools:text="[Playlist] 백예린의 수족관" />
