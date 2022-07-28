@@ -29,7 +29,7 @@
             style="@style/H5_Semibold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/keep_count, 5)}"
+            android:text="@{@string/keep_count(5)}"
             android:textColor="@color/gray_60"
             app:layout_constraintTop_toBottomOf="@id/keep_page_title"
             tools:text="뮤직 폴라로이드 5개"/>

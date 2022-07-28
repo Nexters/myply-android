@@ -1,6 +1,6 @@
 package com.cocaine.myply.feature.data.model
 
-data class MemResponse(
+data class MemoResponse(
     val memoId: String,
     val thumbnailURL: String,
     val title: String,

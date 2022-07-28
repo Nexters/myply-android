@@ -7,7 +7,7 @@
 
         <variable
             name="memo"
-            type="com.cocaine.myply.feature.data.model.MemResponse" />
+            type="com.cocaine.myply.feature.data.model.MemoResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
