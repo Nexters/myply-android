@@ -10,7 +10,7 @@ import com.cocaine.myply.feature.data.model.Keyword
 interface KeywordDao {
 
     @Query("SELECT * FROM keyword")
-    suspend fun getAllKeywords(): List<Keyword>
+    fun getAllKeywords(): List<Keyword>
 
     @Insert
     suspend fun insertKeyword(keyword: Keyword)
