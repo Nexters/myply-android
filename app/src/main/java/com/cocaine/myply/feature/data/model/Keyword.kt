@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Keyword(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String
 )
