@@ -22,6 +22,14 @@
     <fragment
         android:id="@+id/keepFragment"
         android:name="com.cocaine.myply.feature.ui.keep.KeepFragment"
-        android:label="KeepFragment" />
+        android:label="KeepFragment" >
+        <action
+            android:id="@+id/action_keepFragment_to_keepDetailFragment"
+            app:destination="@id/keepDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/keepDetailFragment"
+        android:name="com.cocaine.myply.feature.ui.keep.KeepDetailFragment"
+        android:label="KeepDetailFragment" />
 
 </navigation>

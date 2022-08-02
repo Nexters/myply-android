@@ -10,4 +10,7 @@
     <string name="search_subtitle">지금 뜨는 인기 검색어</string>
     <string name="search_btn">검색</string>
     <string name="search_title">검색</string>
+    <string name="keep_detail_title">기록 보기</string>
+    <string name="keep_detail_placeholder">플레이리스트에 대한 나의 감상 기록을 작성해보세요.</string>
+    <string name="keep_detail_memo_title">나의 감상 기록</string>
 </resources>
