@@ -1,7 +1,9 @@
 package com.cocaine.myply.core.di
 
 import android.content.Context
+import androidx.room.Room
 import com.cocaine.myply.core.storage.MyPlySharedPreference
+import com.cocaine.myply.feature.data.datasource.local.MyPlyDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +17,16 @@ object StorageModule {
 
     @Provides
     @Singleton
-    fun setMyPlySharedPreference(@ApplicationContext context: Context) = MyPlySharedPreference(context)
+    fun setMyPlySharedPreference(@ApplicationContext context: Context) =
+        MyPlySharedPreference(context)
+
+    @Provides
+    @Singleton
+    fun getMyPlyDatabase(@ApplicationContext context: Context): MyPlyDatabase {
+        return Room.databaseBuilder(
+            context,
+            MyPlyDatabase::class.java,
+            "MyPlyDatabase"
+        ).build()
+    }
 }
