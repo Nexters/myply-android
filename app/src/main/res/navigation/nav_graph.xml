@@ -10,7 +10,15 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.cocaine.myply.feature.ui.mypage.MyPageFragment"
-        android:label="MyPageFragment" />
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_mypageEditFragment"
+            app:destination="@id/mypageEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mypageEditFragment"
+        android:name="com.cocaine.myply.feature.ui.mypage.MyPageEditFragment"
+        android:label="MyPageEditFragment" />
     <fragment
         android:id="@+id/playListFragment"
         android:name="com.cocaine.myply.feature.ui.playlist.PlayListFragment"
@@ -23,5 +31,4 @@
         android:id="@+id/keepFragment"
         android:name="com.cocaine.myply.feature.ui.keep.KeepFragment"
         android:label="KeepFragment" />
-
 </navigation>

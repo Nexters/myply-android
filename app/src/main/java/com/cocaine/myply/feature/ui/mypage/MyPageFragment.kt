@@ -1,5 +1,6 @@
 package com.cocaine.myply.feature.ui.mypage
 
+import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentMypageBinding
@@ -14,6 +15,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW
             justifyContent = JustifyContent.FLEX_START
+        }
+
+        binding?.mypageMyKeywordEdit?.setOnClickListener {
+            findNavController().navigate(R.id.action_myPageFragment_to_mypageEditFragment)
         }
     }
 }
