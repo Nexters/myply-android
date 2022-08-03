@@ -30,8 +30,9 @@
             android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_main"
-            app:labelVisibilityMode="labeled"
-            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"/>
+            app:labelVisibilityMode="unlabeled"
+            app:backgroundTint="@color/beige"
+            style="@style/Theme.MyPly.BottomNavigation"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
