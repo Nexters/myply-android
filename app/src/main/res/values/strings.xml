@@ -5,4 +5,9 @@
     <string name="home_order_preference">내 취향</string>
     <string name="keep">보관함</string>
     <string name="keep_count">뮤직 폴라로이드 %d개</string>
+
+    <string name="search_placeholder">검색어를 입력해주세요.</string>
+    <string name="search_subtitle">지금 뜨는 인기 검색어</string>
+    <string name="search_btn">검색</string>
+    <string name="search_title">검색</string>
 </resources>

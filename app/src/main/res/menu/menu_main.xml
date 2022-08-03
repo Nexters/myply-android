@@ -3,20 +3,24 @@
     <item
         android:id="@+id/homeFragment"
         android:enabled="true"
+        android:icon="@drawable/ic_home"
         android:title="home"/>
 
     <item
         android:id="@+id/searchFragment"
         android:enabled="true"
+        android:icon="@drawable/ic_search"
         android:title="search" />
 
     <item
-        android:id="@+id/playListFragment"
+        android:id="@+id/keepFragment"
         android:enabled="true"
-        android:title="playlist" />
+        android:icon="@drawable/ic_keep"
+        android:title="keep" />
 
     <item
         android:id="@+id/myPageFragment"
         android:enabled="true"
+        android:icon="@drawable/ic_mypage"
         android:title="mypage" />
 </menu>
