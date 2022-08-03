@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MyPly</string>
 
+    <string name="hash_keyword">#%s</string>
+
     <string name="home_order_recent">최신</string>
     <string name="home_order_popular">인기</string>
     <string name="home_order_preference">내 취향</string>
