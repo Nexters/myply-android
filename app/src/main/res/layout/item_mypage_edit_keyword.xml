@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="keyword"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            style="@style/Body2_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@{@string/hash_keyword(keyword)}"
+            android:textColor="@color/gray_70"
+            tools:background="@color/gray_30"
+            tools:text="#재즈" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

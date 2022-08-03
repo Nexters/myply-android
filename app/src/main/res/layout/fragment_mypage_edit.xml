@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/mypage_edit_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/mypage_edit_title"
+                style="@style/H3_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="편집하기"
+                android:textColor="@color/gray_90" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                tools:background="@color/black" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <TextView
+            android:id="@+id/mypage_edit_subtitle"
+            style="@style/H1_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:text="플레이리스트 취향을 선택해 주세요."
+            android:textColor="@color/gray_80"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_edit_toolbar" />
+
+        <TextView
+            android:id="@+id/mypage_edit_desc"
+            style="@style/Body2_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:text="1개 이상 15개 이하의 키워드를 선택할 수 있어요."
+            android:textColor="@color/gray_60"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_edit_subtitle" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mypage_edit_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/mypage_edit_divider"
+            app:layout_constraintTop_toBottomOf="@id/mypage_edit_desc"
+            tools:itemCount="20"
+            tools:listitem="@layout/item_mypage_edit_keyword" />
+
+        <View
+            android:id="@+id/mypage_edit_divider"
+            style="@style/Divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toTopOf="@id/mypage_edit_checked_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mypage_edit_checked_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="9dp"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/mypage_edit_btn"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_mypage_keyword" />
+
+        <Button
+            android:id="@+id/mypage_edit_btn"
+            style="@style/Body1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/primary_button"
+            android:text="시작하기"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
