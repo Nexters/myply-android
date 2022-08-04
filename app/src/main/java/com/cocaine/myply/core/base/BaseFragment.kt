@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 abstract class BaseFragment<T : ViewDataBinding>(private val resId: Int) : Fragment() {
     var binding: T? = null
@@ -29,4 +30,8 @@ abstract class BaseFragment<T : ViewDataBinding>(private val resId: Int) : Fragm
     }
 
     abstract fun setup()
+
+    fun goBack(view: View) {
+        findNavController().popBackStack()
+    }
 }
