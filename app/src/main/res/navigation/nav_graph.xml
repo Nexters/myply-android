@@ -14,11 +14,18 @@
         <action
             android:id="@+id/action_myPageFragment_to_mypageEditFragment"
             app:destination="@id/mypageEditFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_mypageNicknameFragment"
+            app:destination="@id/mypageNicknameFragment" />
     </fragment>
     <fragment
         android:id="@+id/mypageEditFragment"
         android:name="com.cocaine.myply.feature.ui.mypage.MyPageEditFragment"
         android:label="MyPageEditFragment" />
+    <fragment
+        android:id="@+id/mypageNicknameFragment"
+        android:name="com.cocaine.myply.feature.ui.mypage.MyPageNicknameFragment"
+        android:label="MyPageNicknameFragment"/>
     <fragment
         android:id="@+id/playListFragment"
         android:name="com.cocaine.myply.feature.ui.playlist.PlayListFragment"

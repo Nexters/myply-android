@@ -20,5 +20,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         binding?.mypageMyKeywordEdit?.setOnClickListener {
             findNavController().navigate(R.id.action_myPageFragment_to_mypageEditFragment)
         }
+        binding?.mypageEditNicknameMore?.setOnClickListener {
+            findNavController().navigate(R.id.action_myPageFragment_to_mypageNicknameFragment)
+        }
     }
 }
