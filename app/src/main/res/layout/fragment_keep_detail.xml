@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cocaine.myply.feature.ui.keep.KeepDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,11 +67,13 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingTop="45dp"
+            android:paddingBottom="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
-            android:enabled="false"
+            android:enabled="@{viewModel.isEditable()}"
             android:gravity="start"
             android:layout_marginEnd="20dp"
+            android:maxLength="200"
             app:layout_constraintTop_toBottomOf="@id/keep_detail_playlist"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -87,9 +91,10 @@
             app:layout_constraintTop_toTopOf="@id/keep_detail_memo" />
 
         <ImageButton
+            android:id="@+id/keep_detail_edit_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_edit_inactive"
+            android:src="@{viewModel.isEditable()? @drawable/ic_edit_active :@drawable/ic_edit_inactive}"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="@id/keep_detail_memo_title"
