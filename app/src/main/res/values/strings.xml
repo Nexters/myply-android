@@ -29,4 +29,9 @@
     <string name="mypage_edit_subtitle">플레이리스트 취향을 선택해 주세요.</string>
     <string name="mypage_edit_desc">1개 이상 15개 이하의 키워드를 선택할 수 있어요.</string>
     <string name="mypage_edit_start_btn">시작하기</string>
+
+    <string name="mypage_nickname_title">닉네임 수정</string>
+    <string name="mypage_nickname_subtitle">새로운 닉네임을 입력해 주세요.</string>
+    <string name="mypage_nickname_length">%d/8</string>
+    <string name="mypage_nickname_next_btn">다음</string>
 </resources>
