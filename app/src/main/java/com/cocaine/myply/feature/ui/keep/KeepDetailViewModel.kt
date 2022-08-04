@@ -6,10 +6,10 @@ import com.cocaine.myply.core.base.BaseViewModel
 import javax.inject.Inject
 
 class KeepDetailViewModel @Inject constructor(): BaseViewModel() {
-    private val _isEditable = MutableLiveData<Boolean>(false)
-    val isEditable: LiveData<Boolean> = _isEditable
+    private val _isWrited = MutableLiveData<Int>(0)
+    val isWrited: LiveData<Int> = _isWrited
 
-    fun updateIsEditable() {
-        _isEditable.value = _isEditable.value?.not()
+    fun updateIsWritable(writeCount: Int) {
+        _isWrited.value = writeCount
     }
 }

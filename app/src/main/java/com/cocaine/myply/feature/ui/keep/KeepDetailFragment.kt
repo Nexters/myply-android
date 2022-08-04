@@ -1,5 +1,7 @@
 package com.cocaine.myply.feature.ui.keep
 
+import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
@@ -15,6 +17,15 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
         binding?.view = this
         binding?.viewModel = viewModel
 
-        binding?.keepDetailEditBtn?.setOnClickListener { viewModel.updateIsEditable() }
+        binding?.keepDetailMemo?.addTextChangedListener {
+            it?.length?.let { len -> viewModel.updateIsWritable(len) }
+        }
+    }
+
+    fun moveToKeepWrite(view: View) {
+        val controller = findNavController()
+        if(controller.currentDestination?.id == R.id.keepDetailFragment) {
+            controller.navigate(R.id.action_keepDetailFragment_to_keepWriteFragment)
+        }
     }
 }
