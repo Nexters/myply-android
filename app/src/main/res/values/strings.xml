@@ -13,4 +13,9 @@
     <string name="keep_detail_title">기록 보기</string>
     <string name="keep_detail_placeholder">플레이리스트에 대한 나의 감상 기록을 작성해보세요.</string>
     <string name="keep_detail_memo_title">나의 감상 기록</string>
+    <string name="keep_write_title">기록 쓰기</string>
+    <string name="keep_write_save">저장하기</string>
+    <string name="keep_write_memo_title">나의 감상 기록</string>
+    <string name="keep_write_hint">플레이리스트에 대한 나의 감상을 기록해 보세요.</string>
+    <string name="keep_write_count">%d/200</string>
 </resources>

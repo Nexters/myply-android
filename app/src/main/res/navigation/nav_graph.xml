@@ -30,6 +30,14 @@
     <fragment
         android:id="@+id/keepDetailFragment"
         android:name="com.cocaine.myply.feature.ui.keep.KeepDetailFragment"
-        android:label="KeepDetailFragment" />
+        android:label="KeepDetailFragment" >
+        <action
+            android:id="@+id/action_keepDetailFragment_to_keepWriteFragment"
+            app:destination="@id/keepWriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/keepWriteFragment"
+        android:name="com.cocaine.myply.feature.ui.keep.KeepWriteFragment"
+        android:label="KeepWriteFragment" />
 
 </navigation>
