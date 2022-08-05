@@ -33,7 +33,7 @@
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
-                android:onClick="@{view::goBack}"
+                android:onClick="@{() -> view.goBack()}"
                 android:src="@drawable/ic_close" />
 
             <TextView

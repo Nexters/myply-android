@@ -31,7 +31,7 @@ abstract class BaseFragment<T : ViewDataBinding>(private val resId: Int) : Fragm
 
     abstract fun setup()
 
-    fun goBack(view: View) {
+    fun goBack() {
         findNavController().popBackStack()
     }
 }

@@ -2,6 +2,7 @@ package com.cocaine.myply.feature.ui.keep
 
 import android.view.View
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragment_keep_detail) {
-    @Inject lateinit var viewModel: KeepDetailViewModel
+    private val viewModel: KeepDetailViewModel by viewModels()
 
     override fun setup() {
         binding?.view = this
