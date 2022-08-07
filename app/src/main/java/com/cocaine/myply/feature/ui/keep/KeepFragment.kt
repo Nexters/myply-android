@@ -6,6 +6,5 @@ import com.cocaine.myply.databinding.FragmentKeepBinding
 
 class KeepFragment : BaseFragment<FragmentKeepBinding>(R.layout.fragment_keep) {
     override fun setup() {
-        TODO("Not yet implemented")
     }
 }

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.cocaine.myply.feature.ui.keep.KeepWriteFragment" />
+
+        <variable
+            name="viewmodel"
+            type="com.cocaine.myply.feature.ui.keep.KeepWriteViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/keep_write_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:onClick="@{() -> view.goBack()}"
+                android:src="@drawable/ic_close" />
+
+            <TextView
+                style="@style/H3_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="@string/keep_write_title"
+                android:textColor="@color/gray_90" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <TextView
+            android:id="@+id/keep_write_title"
+            style="@style/Body1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="14dp"
+            android:background="@color/primary_green_light"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keep_write_appbar"
+            tools:text="[Playlist] 백예린의 수족관" />
+
+        <EditText
+            android:id="@+id/keep_write_memo"
+            style="@style/Body1_Medium"
+            android:layout_width="0dp"
+            android:layout_height="254dp"
+            android:background="@color/white"
+            android:gravity="start"
+            android:hint="@string/keep_write_hint"
+            android:maxLength="200"
+            android:paddingStart="16dp"
+            android:paddingTop="45dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="45dp"
+            app:layout_constraintEnd_toEndOf="@id/keep_write_title"
+            app:layout_constraintStart_toStartOf="@id/keep_write_title"
+            app:layout_constraintTop_toBottomOf="@id/keep_write_title" />
+
+        <TextView
+            style="@style/Body2_Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/keep_write_memo_title"
+            android:textColor="@color/gray_80"
+            app:layout_constraintStart_toStartOf="@id/keep_write_memo"
+            app:layout_constraintTop_toTopOf="@id/keep_write_memo" />
+
+        <TextView
+            style="@style/Body2_Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{@string/keep_write_count(viewmodel.countWord)}"
+            android:textColor="@color/gray_60"
+            android:visibility="@{viewmodel.countWord > 0 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/keep_write_memo"
+            app:layout_constraintEnd_toEndOf="@id/keep_write_memo"
+            tools:text="60/200" />
+
+        <Button
+            style="@style/Body1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/primary_button"
+            android:enabled="@{viewmodel.countWord > 0 ? true : false}"
+            android:text="@string/keep_write_save"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -15,6 +15,7 @@
         <activity
             android:name=".feature.ui.home.MainActivity"
             android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
