@@ -114,5 +114,6 @@
     <!--  Divider Style  -->
     <style name="Divider">
         <item name="android:background">@color/gray_50</item>
+        <item name="android:alpha">0.3</item>
     </style>
 </resources>
