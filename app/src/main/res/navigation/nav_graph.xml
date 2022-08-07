@@ -37,5 +37,21 @@
     <fragment
         android:id="@+id/keepFragment"
         android:name="com.cocaine.myply.feature.ui.keep.KeepFragment"
-        android:label="KeepFragment" />
+        android:label="KeepFragment" >
+        <action
+            android:id="@+id/action_keepFragment_to_keepDetailFragment"
+            app:destination="@id/keepDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/keepDetailFragment"
+        android:name="com.cocaine.myply.feature.ui.keep.KeepDetailFragment"
+        android:label="KeepDetailFragment" >
+        <action
+            android:id="@+id/action_keepDetailFragment_to_keepWriteFragment"
+            app:destination="@id/keepWriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/keepWriteFragment"
+        android:name="com.cocaine.myply.feature.ui.keep.KeepWriteFragment"
+        android:label="KeepWriteFragment" />
 </navigation>
