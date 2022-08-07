@@ -61,7 +61,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
 
     // Flexbox layout
-    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation "com.google.android.flexbox:flexbox:$flexbox_version"
 
     //navigation graph
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
