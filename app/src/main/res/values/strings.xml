@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">MyPly</string>
+
+    <string name="hash_keyword">#%s</string>
+
     <string name="home_order_recent">최신</string>
     <string name="home_order_popular">인기</string>
     <string name="home_order_preference">내 취향</string>
+
     <string name="keep">보관함</string>
     <string name="keep_count">뮤직 폴라로이드 %d개</string>
 
@@ -10,6 +14,7 @@
     <string name="search_subtitle">지금 뜨는 인기 검색어</string>
     <string name="search_btn">검색</string>
     <string name="search_title">검색</string>
+
     <string name="keep_detail_title">기록 보기</string>
     <string name="keep_detail_placeholder">플레이리스트에 대한 나의 감상 기록을 작성해보세요.</string>
     <string name="keep_detail_memo_title">나의 감상 기록</string>
@@ -18,4 +23,24 @@
     <string name="keep_write_memo_title">나의 감상 기록</string>
     <string name="keep_write_hint">플레이리스트에 대한 나의 감상을 기록해 보세요.</string>
     <string name="keep_write_count">%d/200</string>
+
+    <string name="mypage">마이페이지</string>
+    <string name="mypage_keyword">%s의 취향 키워드</string>
+    <string name="mypage_service_info">서비스 정보</string>
+    <string name="mypage_app_version">앱 버전</string>
+    <string name="mypage_team">만든 사람들</string>
+    <string name="mypage_open_source">Open Source License</string>
+    <string name="mypage_user_support">사용자 지원</string>
+    <string name="mypage_edit_nickname">닉네임 수정</string>
+    <string name="mypage_contact">문의하기</string>
+
+    <string name="mypage_edit_title">편집하기</string>
+    <string name="mypage_edit_subtitle">플레이리스트 취향을 선택해 주세요.</string>
+    <string name="mypage_edit_desc">1개 이상 15개 이하의 키워드를 선택할 수 있어요.</string>
+    <string name="mypage_edit_start_btn">시작하기</string>
+
+    <string name="mypage_nickname_title">닉네임 수정</string>
+    <string name="mypage_nickname_subtitle">새로운 닉네임을 입력해 주세요.</string>
+    <string name="mypage_nickname_length">%d/8</string>
+    <string name="mypage_nickname_next_btn">다음</string>
 </resources>

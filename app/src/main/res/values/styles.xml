@@ -110,4 +110,10 @@
         <item name="chipStrokeColor">@color/bg_home_chip</item>
         <item name="ensureMinTouchTargetSize">false</item>
     </style>
+
+    <!--  Divider Style  -->
+    <style name="Divider">
+        <item name="android:background">@color/gray_50</item>
+        <item name="android:alpha">0.3</item>
+    </style>
 </resources>

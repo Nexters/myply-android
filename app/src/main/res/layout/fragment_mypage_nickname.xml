@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/mypage_nickname_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/mypage_nickname_title"
+                style="@style/H3_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/mypage_nickname_title"
+                android:textColor="@color/gray_90" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                tools:background="@color/black" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <TextView
+            android:id="@+id/mypage_nickname_subtitle"
+            style="@style/H1_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/mypage_nickname_subtitle"
+            android:textColor="@color/gray_80"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_nickname_toolbar" />
+
+        <EditText
+            android:id="@+id/mypage_nickname_input"
+            style="@style/Body1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/bg_single_textfield"
+            android:padding="16dp"
+            android:textColor="@color/gray_80"
+            app:layout_constraintTop_toBottomOf="@id/mypage_nickname_subtitle"
+            tools:text="유저명" />
+
+        <TextView
+            android:id="@+id/mypage_nickname_length"
+            style="@style/Body2_Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/gray_60"
+            app:layout_constraintEnd_toEndOf="@id/mypage_nickname_input"
+            app:layout_constraintTop_toBottomOf="@id/mypage_nickname_input"
+            tools:text="2/8" />
+
+        <Button
+            android:id="@+id/mypage_nickname_btn"
+            style="@style/Body1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/primary_button"
+            android:text="@string/mypage_nickname_next_btn"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
