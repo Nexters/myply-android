@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cocaine.myply.feature.ui.mypage.MyPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,6 +59,7 @@
             android:layout_marginTop="34dp"
             android:background="@drawable/bg_single_textfield"
             android:padding="16dp"
+            android:text="@={viewModel.nickname}"
             android:textColor="@color/gray_80"
             app:layout_constraintTop_toBottomOf="@id/mypage_nickname_subtitle"
             tools:text="유저명" />

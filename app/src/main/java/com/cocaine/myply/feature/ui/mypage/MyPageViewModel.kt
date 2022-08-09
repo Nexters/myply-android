@@ -9,8 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyPageViewModel @Inject constructor(): BaseViewModel() {
 
-    private val _nickname = MutableLiveData<String>()
-    val nickname: LiveData<String> = _nickname
+    val nickname = MutableLiveData<String>()
 
     // 서버에 반영된 선택된 키워드
     private val _keywords = MutableLiveData<List<String>>()
@@ -26,5 +25,9 @@ class MyPageViewModel @Inject constructor(): BaseViewModel() {
 
     fun updateKeywords() {
         // TODO 새로운 키워드 목록을 서버에 반영
+    }
+
+    fun updateNickname() {
+        // TODO 새로운 닉네임을 서버에 반영
     }
 }
