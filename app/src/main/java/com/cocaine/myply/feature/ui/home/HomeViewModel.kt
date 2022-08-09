@@ -20,4 +20,8 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
     fun updatePlaylistOrder(playlistOrder: PlaylistOrder) {
         _playlistOrder.value = playlistOrder
     }
+
+    fun updatePlaylistLiked(videoId: String) {
+        // TODO 해당 비디오의 Liked update
+    }
 }

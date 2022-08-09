@@ -10,7 +10,8 @@ import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
 import com.cocaine.myply.feature.data.model.VideoResponse
 
-class PlaylistAdapter : ListAdapter<VideoResponse, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
+class PlaylistAdapter(private val onLikedClick: (String) -> Unit) :
+    ListAdapter<VideoResponse, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<VideoResponse>() {
@@ -27,10 +28,17 @@ class PlaylistAdapter : ListAdapter<VideoResponse, PlaylistAdapter.PlaylistViewH
         }
     }
 
-    class PlaylistViewHolder(private val binding: ItemPlaylistBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class PlaylistViewHolder(
+        private val binding: ItemPlaylistBinding,
+        private val onLikedClick: (String) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(video: VideoResponse) {
             binding.video = video
+
+            binding.playlistHeart.setOnClickListener {
+                onLikedClick(video.youtubeVideoId)
+            }
         }
     }
 
@@ -44,7 +52,7 @@ class PlaylistAdapter : ListAdapter<VideoResponse, PlaylistAdapter.PlaylistViewH
                 R.layout.item_playlist,
                 parent,
                 false
-            )
+            ), onLikedClick
         )
     }
 

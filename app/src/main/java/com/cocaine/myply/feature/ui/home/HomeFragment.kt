@@ -20,7 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun setPlaylistAdapter() {
-        playlistAdapter = PlaylistAdapter()
+        playlistAdapter = PlaylistAdapter(::onLikedClick)
         binding?.homePlaylist?.adapter = playlistAdapter
     }
 
@@ -40,5 +40,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.playlists.observe(this) {
             playlistAdapter.submitList(it)
         }
+    }
+
+    private fun onLikedClick(videoId: String) {
+        homeViewModel.updatePlaylistLiked(videoId)
     }
 }
