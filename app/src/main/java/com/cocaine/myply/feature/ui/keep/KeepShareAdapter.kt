@@ -3,29 +3,57 @@ package com.cocaine.myply.feature.ui.keep
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemFrameColorBinding
 import com.cocaine.myply.feature.data.model.ShareColorItem
+import okhttp3.internal.notify
 
-class KeepShareAdapter(private val viewModel: KeepShareViewModel) : RecyclerView.Adapter<KeepShareAdapter.KeepShareItemViewHolder>() {
-    private val itemList = mutableListOf<ShareColorItem>(
-        ShareColorItem(R.color.white, R.color.black),
-        ShareColorItem(R.color.primary_green_basic, R.color.white),
-        ShareColorItem(R.color.primary_green_light, R.color.white),
-        ShareColorItem(R.color.secondary_red, R.color.white),
-        ShareColorItem(R.color.secondary_brown, R.color.white),
-        ShareColorItem(R.color.secondary_butter, R.color.black),
-        ShareColorItem(R.color.secondary_blue, R.color.black)
-    )
+class KeepShareAdapter(private val getSelectedViewColor: () -> ShareColorItem, private val updateSelectedViewColor: (ShareColorItem) -> Unit) :
+    ListAdapter<ShareColorItem, KeepShareAdapter.KeepShareItemViewHolder>(diffUtil) {
+    companion object {
+        val diffUtil = object: DiffUtil.ItemCallback<ShareColorItem>() {
+            override fun areItemsTheSame(
+                oldItem: ShareColorItem,
+                newItem: ShareColorItem
+            ): Boolean {
+                return oldItem === newItem
+            }
 
-    private var selectedItemPosition = 0
+            override fun areContentsTheSame(
+                oldItem: ShareColorItem,
+                newItem: ShareColorItem
+            ): Boolean {
+                return oldItem.viewColor == newItem.viewColor && oldItem.fontColor == newItem.fontColor
+            }
 
-    class KeepShareItemViewHolder(private val binding: ItemFrameColorBinding) :
+        }
+    }
+
+    class KeepShareItemViewHolder(
+        private val binding: ItemFrameColorBinding,
+        private val getSelectedViewColor: () -> ShareColorItem,
+        private val updateSelectedViewColor: (ShareColorItem) -> Unit,
+        private val onClick: (item: ShareColorItem) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ShareColorItem, selectedItem: ShareColorItem) {
+        init {
+            itemView.rootView.setOnClickListener {
+                val prevItem = getSelectedViewColor()
+
+                val selectedItem = ShareColorItem.values()[adapterPosition]
+                updateSelectedViewColor(selectedItem)
+
+                onClick(prevItem)
+                onClick(selectedItem)
+            }
+        }
+
+        fun bind(item: ShareColorItem) {
             binding.color = item
-            binding.isSelected = (selectedItem.viewColor == item.viewColor)
+            binding.isSelected = (getSelectedViewColor().viewColor == item.viewColor)
         }
     }
 
@@ -36,21 +64,18 @@ class KeepShareAdapter(private val viewModel: KeepShareViewModel) : RecyclerView
             parent,
             false
         )
-        return KeepShareItemViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: KeepShareItemViewHolder, position: Int) {
-        holder.bind(itemList[position], itemList[selectedItemPosition])
-        holder.itemView.rootView.setOnClickListener {
-            var prevPosition = selectedItemPosition
-            selectedItemPosition = holder.adapterPosition
-
-            viewModel.updateSelectedViewFrameColor(itemList[selectedItemPosition])
-
-            notifyItemChanged(prevPosition)
-            notifyItemChanged(selectedItemPosition)
+        return KeepShareItemViewHolder(binding, getSelectedViewColor,updateSelectedViewColor) { item ->
+            ShareColorItem.values().forEachIndexed { index, shareColorItem ->
+                if(item == shareColorItem) {
+                    notifyItemChanged(index)
+                }
+            }
         }
     }
 
-    override fun getItemCount(): Int = itemList.size
+    override fun onBindViewHolder(holder: KeepShareItemViewHolder, position: Int) {
+        holder.bind(ShareColorItem.values()[position])
+    }
+
+    override fun getItemCount(): Int = ShareColorItem.values().size
 }
