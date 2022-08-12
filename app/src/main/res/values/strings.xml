@@ -43,4 +43,13 @@
     <string name="mypage_nickname_subtitle">새로운 닉네임을 입력해 주세요.</string>
     <string name="mypage_nickname_length">%d/8</string>
     <string name="mypage_nickname_next_btn">다음</string>
+
+    <string name="keep_share">공유하기</string>
+    <string name="share_change_title">프레임 색상 변경하기</string>
+    <string name="keep_share_user_name">%s의 기억에 남은 playlist</string>
+    <string name="share_button">공유하기</string>
+    <string name="share_instagram">인스타그램에 공유</string>
+    <string name="save_gallery">갤러리에 저장</string>
+    <string name="toast_save_image">갤러리에 폴라로이드가 저장되었어요.</string>
+
 </resources>

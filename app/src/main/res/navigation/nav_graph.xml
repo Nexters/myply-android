@@ -49,9 +49,16 @@
         <action
             android:id="@+id/action_keepDetailFragment_to_keepWriteFragment"
             app:destination="@id/keepWriteFragment" />
+        <action
+            android:id="@+id/action_keepDetailFragment_to_keepShareFragment"
+            app:destination="@id/keepShareFragment" />
     </fragment>
     <fragment
         android:id="@+id/keepWriteFragment"
         android:name="com.cocaine.myply.feature.ui.keep.KeepWriteFragment"
         android:label="KeepWriteFragment" />
+    <fragment
+        android:id="@+id/keepShareFragment"
+        android:name="com.cocaine.myply.feature.ui.keep.KeepShareFragment"
+        android:label="KeepShareFragment" />
 </navigation>
