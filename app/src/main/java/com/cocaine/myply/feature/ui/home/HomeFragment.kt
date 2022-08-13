@@ -42,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun onLikedClick(videoId: String) {
-        homeViewModel.updatePlaylistLiked(videoId)
+    private fun onLikedClick(clickedPosition: Int) {
+        homeViewModel.updatePlaylistLiked(clickedPosition)
     }
 }

@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(): BaseViewModel() {
+class HomeViewModel @Inject constructor() : BaseViewModel() {
 
     private val _playlistOrder = MutableLiveData<PlaylistOrder>()
     val playlistOrder: LiveData<PlaylistOrder> = _playlistOrder
@@ -21,7 +21,8 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
         _playlistOrder.value = playlistOrder
     }
 
-    fun updatePlaylistLiked(videoId: String) {
+    fun updatePlaylistLiked(clickedPosition: Int) {
+        val clickedPlaylist = _playlists.value?.get(clickedPosition) ?: return
         // TODO 해당 비디오의 Liked update
     }
 }
