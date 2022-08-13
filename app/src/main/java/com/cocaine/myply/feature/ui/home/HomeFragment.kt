@@ -1,6 +1,8 @@
 package com.cocaine.myply.feature.ui.home
 
+import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentHomeBinding
@@ -14,6 +16,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun setup() {
         setPlaylistAdapter()
+        setPlaylistScrollListener()
         setPlaylistChipGroupClickListener()
 
         setViewModel()
@@ -22,6 +25,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun setPlaylistAdapter() {
         playlistAdapter = PlaylistAdapter(::onLikedClick)
         binding?.homePlaylist?.adapter = playlistAdapter
+    }
+
+    private fun setPlaylistScrollListener() {
+        binding?.homePlaylist?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                // TODO :: 도연 :: 스크롤 속도가 느릴 때 방향 인식이 이상해짐
+                binding?.homePlaylistOrder?.visibility = when {
+                    dy > 0 -> View.GONE
+                    dy < 0 -> View.VISIBLE
+                    else -> return
+                }
+            }
+        })
     }
 
     private fun setPlaylistChipGroupClickListener() {
