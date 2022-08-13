@@ -3,6 +3,9 @@
     package="com.cocaine.myply">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <application
         android:name=".MyPlyApplication"
@@ -14,9 +17,9 @@
         android:theme="@style/Theme.MyPly">
         <activity
             android:name=".feature.ui.home.MainActivity"
+            android:exported="true"
             android:resizeableActivity="true"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

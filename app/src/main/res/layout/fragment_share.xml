@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.cocaine.myply.feature.ui.keep.KeepShareFragment" />
+
+        <variable
+            name="viewmodel"
+            type="com.cocaine.myply.feature.ui.keep.KeepShareViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/share_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/keep_share_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/H3_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/keep_share"
+                android:textColor="@color/gray_90" />
+
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:onClick="@{() -> view.goBack()}"
+                android:src="@drawable/ic_close" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keep_share_appbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/keep_share_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:set_tint="@{viewmodel.selectedColorPair.viewColor}">
+
+                    <TextView
+                        android:id="@+id/share_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@{viewmodel.selectedColorPair.fontColor}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/keep_share_user_name" />
+
+                    <ImageView
+                        android:id="@+id/share_img"
+                        android:layout_width="0dp"
+                        android:layout_height="170dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/share_name"
+                        app:layout_constraintTop_toBottomOf="@id/share_name" />
+
+                    <TextView
+                        android:id="@+id/share_title"
+                        style="@style/Body1_Semibold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="test"
+                        app:layout_constraintEnd_toEndOf="@id/share_img"
+                        app:layout_constraintStart_toStartOf="@id/share_img"
+                        app:layout_constraintTop_toBottomOf="@id/share_img"
+                        app:set_font_color="@{viewmodel.selectedColorPair.fontColor}"
+                        tools:text="share title" />
+
+                    <TextView
+                        android:id="@+id/share_des"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        app:layout_constraintEnd_toEndOf="@id/share_title"
+                        app:layout_constraintStart_toStartOf="@id/share_title"
+                        app:layout_constraintTop_toBottomOf="@id/share_title"
+                        app:set_font_color="@{viewmodel.selectedColorPair.fontColor}"
+                        tools:text="1\n2\n3\n4" />
+
+                    <ImageView
+                        android:id="@+id/share_logo"
+                        android:layout_width="55dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="17dp"
+                        android:src="@drawable/ic_logo"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/share_des"
+                        app:layout_constraintTop_toBottomOf="@id/share_des" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/share_color_title"
+                    style="@style/Body1_Semibold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:text="@string/share_change_title"
+                    android:textColor="@color/gray_80"
+                    app:layout_constraintStart_toStartOf="@id/keep_share_view"
+                    app:layout_constraintTop_toBottomOf="@id/keep_share_view" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/share_color_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="80dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/share_color_button"
+                    app:layout_constraintEnd_toEndOf="@id/keep_share_view"
+                    app:layout_constraintStart_toStartOf="@id/keep_share_view"
+                    app:layout_constraintTop_toBottomOf="@id/share_color_title"
+                    tools:itemCount="7"
+                    tools:listitem="@layout/item_frame_color" />
+
+                <Button
+                    android:id="@+id/share_color_button"
+                    style="@style/Body1_Semibold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/primary_button"
+                    android:onClick="@{() -> view.showShareMenu()}"
+                    android:text="@string/share_button"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/keep_share_view"
+                    app:layout_constraintStart_toStartOf="@id/keep_share_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

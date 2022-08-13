@@ -23,10 +23,18 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
         }
     }
 
-    fun moveToKeepWrite(view: View) {
+    fun moveToKeepWrite() {
         val controller = findNavController()
         if(controller.currentDestination?.id == R.id.keepDetailFragment) {
             controller.navigate(R.id.action_keepDetailFragment_to_keepWriteFragment)
+        }
+    }
+
+    fun moveToKeepShare() {
+        val controller = findNavController()
+
+        if(controller.currentDestination?.id == R.id.keepDetailFragment) {
+            controller.navigate(R.id.action_keepDetailFragment_to_keepShareFragment)
         }
     }
 }

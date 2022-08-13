@@ -46,7 +46,8 @@
                 android:src="@drawable/ic_share"
                 android:layout_gravity="end"
                 android:layout_marginEnd="19dp"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:onClick="@{() -> view.moveToKeepShare()}"/>
         </com.google.android.material.appbar.MaterialToolbar>
 
         <include
@@ -99,7 +100,7 @@
             android:id="@+id/keep_detail_edit_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:onClick="@{view::moveToKeepWrite}"
+            android:onClick="@{() -> view.moveToKeepWrite()}"
             android:src="@{viewModel.isWrited ? @drawable/ic_edit_active :@drawable/ic_edit_inactive}"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
