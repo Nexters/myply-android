@@ -54,7 +54,7 @@
             android:layout_marginStart="21dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="14dp"
-            android:background="@color/primary_green_light"
+            android:background="@drawable/ic_keep_wirte_back"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
@@ -95,12 +95,27 @@
 
         <TextView
             style="@style/Body2_Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="13dp"
+            android:text="@string/keep_write_max_caution"
+            android:textColor="@color/secondary_red"
+            android:visibility="@{viewmodel.countWord == 200 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/keep_write_memo"
+            app:layout_constraintStart_toStartOf="@id/keep_write_memo"
+            app:layout_constraintEnd_toStartOf="@id/keep_write_cnt"/>
+
+        <TextView
+            style="@style/Body2_Medium"
+            android:id="@+id/keep_write_cnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@{@string/keep_write_count(viewmodel.countWord)}"
-            android:textColor="@color/gray_60"
+            android:textColor="@{viewmodel.countWord == 200 ? @color/secondary_red  : @color/gray_60}"
             android:visibility="@{viewmodel.countWord > 0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/keep_write_memo"
             app:layout_constraintEnd_toEndOf="@id/keep_write_memo"

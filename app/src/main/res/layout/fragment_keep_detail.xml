@@ -50,62 +50,73 @@
                 android:onClick="@{() -> view.moveToKeepShare()}"/>
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <include
-            android:id="@+id/keep_detail_playlist"
-            layout="@layout/item_playlist"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="284dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/keep_detail_appbar"  />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keep_detail_appbar">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/keep_detail_memo"
-            style="@style/Body1_Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="120dp"
-            android:hint="@string/keep_detail_placeholder"
-            android:background="@color/white"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="45dp"
-            android:paddingBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="20dp"
-            android:enabled="false"
-            android:gravity="start"
-            android:layout_marginEnd="20dp"
-            android:maxLength="200"
-            app:layout_constraintTop_toBottomOf="@id/keep_detail_playlist"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+                <include
+                    android:id="@+id/keep_detail_playlist"
+                    layout="@layout/item_playlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="284dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"  />
 
-        <TextView
-            android:id="@+id/keep_detail_memo_title"
-            style="@style/Body2_Bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/keep_detail_memo_title"
-            android:textColor="@color/gray_80"
-            app:layout_constraintStart_toStartOf="@id/keep_detail_memo"
-            app:layout_constraintTop_toTopOf="@id/keep_detail_memo" />
+                <EditText
+                    android:id="@+id/keep_detail_memo"
+                    style="@style/Body1_Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="120dp"
+                    android:hint="@string/keep_detail_placeholder"
+                    android:background="@color/white"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="45dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="20dp"
+                    android:enabled="false"
+                    android:gravity="start"
+                    android:layout_marginEnd="20dp"
+                    android:maxLength="200"
+                    app:layout_constraintTop_toBottomOf="@id/keep_detail_playlist"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
 
-        <ImageButton
-            android:id="@+id/keep_detail_edit_btn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:onClick="@{() -> view.moveToKeepWrite()}"
-            android:src="@{viewModel.isWrited ? @drawable/ic_edit_active :@drawable/ic_edit_inactive}"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintTop_toTopOf="@id/keep_detail_memo_title"
-            app:layout_constraintEnd_toEndOf="@id/keep_detail_memo"/>
+                <TextView
+                    android:id="@+id/keep_detail_memo_title"
+                    style="@style/Body2_Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/keep_detail_memo_title"
+                    android:textColor="@color/gray_80"
+                    app:layout_constraintStart_toStartOf="@id/keep_detail_memo"
+                    app:layout_constraintTop_toTopOf="@id/keep_detail_memo" />
 
+                <ImageButton
+                    android:id="@+id/keep_detail_edit_btn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:onClick="@{() -> view.moveToKeepWrite()}"
+                    android:src="@{viewModel.isWrited ? @drawable/ic_edit_active :@drawable/ic_edit_inactive}"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintTop_toTopOf="@id/keep_detail_memo_title"
+                    app:layout_constraintEnd_toEndOf="@id/keep_detail_memo"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
