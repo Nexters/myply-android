@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding?.mainBottomMenu?.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id) {
-                R.id.keepDetailFragment, R.id.keepWriteFragment -> hideBottomNav()
+                R.id.keepDetailFragment, R.id.keepWriteFragment, R.id.keepShareFragment -> hideBottomNav()
                 else -> showBottomNav()
             }
         }

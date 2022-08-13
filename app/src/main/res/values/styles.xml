@@ -116,4 +116,20 @@
         <item name="android:background">@color/gray_50</item>
         <item name="android:alpha">0.3</item>
     </style>
+
+    <!-- BottomSheet Style -->
+    <style name="MyPly.BottomSheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/MyPly.BottomSheet.Modal</item>
+    </style>
+
+    <style name="MyPly.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/beige</item>
+        <item name="shapeAppearance">@style/MyPly.LargeComponent</item>>
+    </style>
+
+    <style name="MyPly.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
 </resources>
