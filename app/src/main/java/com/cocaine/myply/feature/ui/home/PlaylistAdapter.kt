@@ -3,16 +3,42 @@ package com.cocaine.myply.feature.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
 import com.cocaine.myply.feature.data.model.VideoResponse
 
-class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
-    val list = ArrayList<VideoResponse>()
+class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
+    ListAdapter<VideoResponse, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
 
-    class PlaylistViewHolder(private val binding: ItemPlaylistBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<VideoResponse>() {
+            override fun areItemsTheSame(oldItem: VideoResponse, newItem: VideoResponse): Boolean {
+                return oldItem.youtubeVideoId == newItem.youtubeVideoId
+            }
+
+            override fun areContentsTheSame(
+                oldItem: VideoResponse,
+                newItem: VideoResponse
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
+    class PlaylistViewHolder(
+        private val binding: ItemPlaylistBinding,
+        private val onLikedClick: (Int) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.playlistHeart.setOnClickListener {
+                onLikedClick(adapterPosition)
+            }
+        }
+
         fun bind(video: VideoResponse) {
             binding.video = video
         }
@@ -28,13 +54,11 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>
                 R.layout.item_playlist,
                 parent,
                 false
-            )
+            ), onLikedClick
         )
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(currentList[position])
     }
-
-    override fun getItemCount(): Int = list.size
 }
