@@ -21,7 +21,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
         setKeywordAdapter()
         setNavigateClickListener()
-        setViewModel()
+        setKeywordObserver()
     }
 
     private fun setKeywordAdapter() {
@@ -45,7 +45,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         }
     }
 
-    private fun setViewModel() {
+    private fun setKeywordObserver() {
         myPageViewModel.keywords.observe(viewLifecycleOwner) {
             myPageKeywordAdapter.submitList(it)
         }

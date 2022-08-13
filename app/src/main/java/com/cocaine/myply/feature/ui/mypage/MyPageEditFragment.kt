@@ -16,7 +16,7 @@ class MyPageEditFragment : BaseFragment<FragmentMypageEditBinding>(R.layout.frag
     override fun setup() {
         setKeywordAdapter()
         setKeywordUpdateConfirmClickListener()
-        setViewModel()
+        setKeywordObserver()
     }
 
     private fun setKeywordAdapter() {
@@ -33,7 +33,7 @@ class MyPageEditFragment : BaseFragment<FragmentMypageEditBinding>(R.layout.frag
         }
     }
 
-    private fun setViewModel() {
+    private fun setKeywordObserver() {
         myPageViewModel.baseKeywords.observe(viewLifecycleOwner) {
             myPageEditKeywordAdapter.submitList(it)
         }
