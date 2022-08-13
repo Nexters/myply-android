@@ -53,26 +53,25 @@
             android:id="@+id/playlist_tags"
             android:layout_width="263dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/playlist_heart"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/playlist_title"
+            app:layout_constraintTop_toTopOf="@id/playlist_heart"
             tools:itemCount="4" />
 
         <ImageView
             android:id="@+id/playlist_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:src="@drawable/ic_like_inactive"
-            app:layout_constraintBottom_toBottomOf="@id/playlist_tags"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@id/playlist_tags"
-            app:layout_constraintTop_toTopOf="@id/playlist_tags" />
+            app:layout_constraintTop_toBottomOf="@id/playlist_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
