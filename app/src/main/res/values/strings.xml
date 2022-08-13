@@ -51,5 +51,6 @@
     <string name="share_instagram">인스타그램에 공유</string>
     <string name="save_gallery">갤러리에 저장</string>
     <string name="toast_save_image">갤러리에 폴라로이드가 저장되었어요.</string>
+    <string name="search_no_result">‘%s’ 에 대한 검색 결과가 없어요.\n다른 키워드로 검색해 보세요.</string>
 
 </resources>
