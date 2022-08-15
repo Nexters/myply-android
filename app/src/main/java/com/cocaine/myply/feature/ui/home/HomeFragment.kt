@@ -1,11 +1,16 @@
 package com.cocaine.myply.feature.ui.home
 
+import android.view.LayoutInflater
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentHomeBinding
+import com.cocaine.myply.databinding.ToastPlaylistDeleteBinding
+import com.cocaine.myply.databinding.ToastPlaylistSaveBinding
 import com.cocaine.myply.feature.data.model.PlaylistOrder
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -58,9 +63,46 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.playlists.observe(viewLifecycleOwner) {
             playlistAdapter.submitList(it)
         }
+        homeViewModel.likedUpdatePlaylistId.observe(viewLifecycleOwner) { (playlistId, isLiked) ->
+            showPlaylistLikedToast(playlistId, isLiked)
+        }
     }
 
     private fun onLikedClick(clickedPosition: Int) {
         homeViewModel.updatePlaylistLiked(clickedPosition)
+    }
+
+    private fun showPlaylistLikedToast(playlistId: String, isLiked: Boolean) {
+        when (isLiked) {
+            true -> getToastPlaylistSaveView(playlistId)
+            false -> getToastPlaylistDeleteView()
+        }?.let { toast ->
+            // TODO snack bar show
+        }
+    }
+
+    private fun getToastPlaylistSaveView(playlistId: String): View? {
+        return DataBindingUtil.bind<ToastPlaylistSaveBinding>(
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.toast_playlist_save,
+                null,
+                false
+            )
+        )?.apply {
+            this.btnMoveToKeepWrite.setOnClickListener {
+                // move to write
+                findNavController().navigate(R.id.action_homeFragment_to_keepWriteFragment)
+            }
+        }?.root
+    }
+
+    private fun getToastPlaylistDeleteView(): View? {
+        return DataBindingUtil.bind<ToastPlaylistDeleteBinding>(
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.toast_playlist_delete,
+                null,
+                false
+            )
+        )?.root
     }
 }
