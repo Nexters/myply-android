@@ -14,13 +14,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setup() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
         binding?.mainBottomMenu?.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when(destination.id) {
-                R.id.keepDetailFragment, R.id.keepWriteFragment, R.id.keepShareFragment -> hideBottomNav()
+            when (destination.id) {
+                R.id.keepDetailFragment, R.id.keepWriteFragment, R.id.keepShareFragment, R.id.onBoardingFragment -> hideBottomNav()
                 else -> showBottomNav()
             }
         }
