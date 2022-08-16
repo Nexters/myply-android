@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyPly">
+        android:theme="@style/Theme.MyPly.Splash">
         <activity
             android:name=".feature.ui.home.MainActivity"
             android:exported="true"
