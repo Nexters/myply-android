@@ -13,34 +13,13 @@ class OnBoardingFragmentAdapter(fragmentActivity: FragmentActivity) :
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
-                OnBoardingContentFragment().apply {
-                    val bundle = bundleOf(
-                        OnBoardingContentFragment.ONBOARDING_IMG_KEY to R.drawable.ic_onboarding_1,
-                        OnBoardingContentFragment.ONBOARDING_TXT_KEY to R.string.onboarding_1
-                    )
-
-                    arguments = bundle
-                }
+                OnBoardingContentFragment.instance(R.string.onboarding_1, R.drawable.ic_onboarding_1)
             }
             1 -> {
-                OnBoardingContentFragment().apply {
-                    val bundle = bundleOf(
-                        OnBoardingContentFragment.ONBOARDING_IMG_KEY to R.drawable.ic_onboarding_2,
-                        OnBoardingContentFragment.ONBOARDING_TXT_KEY to R.string.onboarding_2
-                    )
-
-                    arguments = bundle
-                }
+                OnBoardingContentFragment.instance(R.string.onboarding_2, R.drawable.ic_onboarding_2)
             }
             else -> {
-                OnBoardingContentFragment().apply {
-                    val bundle = bundleOf(
-                        OnBoardingContentFragment.ONBOARDING_IMG_KEY to R.drawable.ic_onboarding_3,
-                        OnBoardingContentFragment.ONBOARDING_TXT_KEY to R.string.onboarding_3
-                    )
-
-                    arguments = bundle
-                }
+                OnBoardingContentFragment.instance(R.string.onboarding_3, R.drawable.ic_onboarding_3)
             }
         }
     }
