@@ -4,7 +4,6 @@ import android.content.Context
 import com.cocaine.myply.BuildConfig
 import com.cocaine.myply.core.utils.getDeviceToken
 import com.cocaine.myply.feature.data.datasource.remote.MyPlyService
-import com.cocaine.myply.feature.data.datasource.remote.MyPlyServiceImpl
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -23,7 +22,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = ""
+    private const val BASE_URL = "https://myply-server-rwwy3wj4sa-du.a.run.app/api/v1/"
 
     @Provides
     @Singleton
@@ -32,14 +31,12 @@ object NetworkModule {
         val logging =
             HttpLoggingInterceptor().apply {
                 setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC)
-
             }
 
         val networkInterceptor = Interceptor { chain ->
             val request =
-                chain.request().newBuilder().addHeader("device-token", getDeviceToken(context))
+                chain.request().newBuilder().addHeader("Device-token", getDeviceToken(context))
                     .build()
-
             chain.proceed(request)
         }
 
@@ -55,6 +52,6 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun getMyPlyService(retrofit: Retrofit): MyPlyService = MyPlyServiceImpl(retrofit)
+    fun getMyPlyService(retrofit: Retrofit): MyPlyService = retrofit.create(MyPlyService::class.java)
 
 }
