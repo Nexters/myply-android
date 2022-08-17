@@ -3,18 +3,48 @@ package com.cocaine.myply.feature.ui.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
-import com.cocaine.myply.feature.data.model.SearchResponse
+import com.cocaine.myply.feature.data.model.VideoResponse
+import com.google.android.material.chip.Chip
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-    val searchResultPlayList = ArrayList<SearchResponse>()
+class SearchAdapter : ListAdapter<VideoResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<VideoResponse>() {
+            override fun areItemsTheSame(oldItem: VideoResponse, newItem: VideoResponse): Boolean {
+                return oldItem === newItem
+            }
+
+            override fun areContentsTheSame(
+                oldItem: VideoResponse,
+                newItem: VideoResponse
+            ): Boolean {
+                return oldItem.youtubeVideoId == newItem.youtubeVideoId
+            }
+
+        }
+    }
 
     class SearchViewHolder(private val binding: ItemPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: SearchResponse) {
-            
+        fun bind(data: VideoResponse) {
+            binding.video = data
+            data.youtubeTags?.let { tags ->
+                for(i in tags) {
+                    Chip(binding.root.context).apply {
+                        text = i
+                        isCheckable = false
+                        binding.playlistTags.addView(this)
+                    }.setOnCheckedChangeListener { _, b ->
+                        if(b) {
+
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -29,8 +59,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(searchResultPlayList[position])
+        holder.bind(currentList[position])
     }
-
-    override fun getItemCount(): Int = searchResultPlayList.size
 }

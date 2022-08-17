@@ -49,9 +49,9 @@
             app:layout_constraintTop_toBottomOf="@id/playlist_thumbnail"
             tools:text="[Playlist] 백예린의 수족관" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.google.android.material.chip.ChipGroup
             android:id="@+id/playlist_tags"
-            android:layout_width="263dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
