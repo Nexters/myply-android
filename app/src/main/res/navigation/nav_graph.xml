@@ -61,4 +61,8 @@
         android:id="@+id/keepShareFragment"
         android:name="com.cocaine.myply.feature.ui.keep.KeepShareFragment"
         android:label="KeepShareFragment" />
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.cocaine.myply.feature.ui.onboarding.OnBoardingFragment"
+        android:label="OnBoardingFragment" />
 </navigation>
