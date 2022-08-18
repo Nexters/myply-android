@@ -88,8 +88,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     private fun setSearchViewVisibility(resultSize: Int) {
-        binding?.searchRecomend?.visibility = View.INVISIBLE
-        binding?.searchSubtitle?.visibility = View.INVISIBLE
+        binding?.searchShimmer?.visibility = View.INVISIBLE
 
         if (resultSize > 0) {
             binding?.searchResultList?.visibility = View.VISIBLE
@@ -112,14 +111,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private fun handleError() {
         viewModel.errMsg.observe(this) {
             if (!it.hasBeenHandled) {
+                binding?.searchShimmer?.visibility = View.INVISIBLE
                 Toast.makeText(requireContext(), it.peekContent(), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     fun searchPlayList(query: String?) {
+        binding?.searchSubtitle?.visibility = View.GONE
+        binding?.searchRecomend?.visibility = View.GONE
+
         binding?.searchEditTxt?.clearFocus()
         adapter.submitList(null)
+
+        binding?.searchShimmer?.visibility = View.VISIBLE
         viewModel.searchMusicPlayList(query)
     }
 }

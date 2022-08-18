@@ -126,6 +126,27 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_playlist"/>
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/search_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_edit_layout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <Button
             android:id="@+id/search_btn"
             style="@style/Body1_Semibold"
