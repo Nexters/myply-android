@@ -96,7 +96,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         )?.apply {
             this.btnMoveToKeepWrite.setOnClickListener {
                 // move to write
-                findNavController().navigate(R.id.action_homeFragment_to_keepWriteFragment)
+                findNavController().let { controller ->
+                    if (controller.currentDestination?.id == R.id.homeFragment) {
+                        controller.navigate(R.id.action_homeFragment_to_keepWriteFragment)
+                    }
+                }
             }
         }?.root
     }
