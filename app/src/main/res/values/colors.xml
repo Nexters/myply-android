@@ -36,4 +36,7 @@
 
     <!--  Background  -->
     <color name="beige">#F7F6F2</color>
+
+    <!--  Opacity  -->
+    <color name="gray_100_alpha_50">#80111723</color>
 </resources>

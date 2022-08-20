@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.cocaine.myply.feature.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_keepWriteFragment"
+            app:destination="@id/keepWriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.cocaine.myply.feature.ui.mypage.MyPageFragment"

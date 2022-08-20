@@ -58,4 +58,8 @@
     <string name="onboarding_3">플레이리스트에 대한 내 생각을\n기록하고 공유할 수 있어요</string>
     <string name="onboarding_start_btn">시작하기</string>
 
+    <string name="playlist_write_memo"><u>감상 쓰기</u></string>
+    <string name="playlist_save">플레이리스트를 저장했어요.</string>
+    <string name="playlist_delete">보관함에서 플레이리스트를 삭제했어요.</string>
+
 </resources>

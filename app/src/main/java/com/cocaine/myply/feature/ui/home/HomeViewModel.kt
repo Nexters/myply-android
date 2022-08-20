@@ -17,6 +17,9 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     private val _playlists = MutableLiveData<List<VideoResponse>>()
     val playlists: LiveData<List<VideoResponse>> = _playlists
 
+    private val _likedUpdatePlaylistId = MutableLiveData<Pair<String, Boolean>>()
+    val likedUpdatePlaylistId: LiveData<Pair<String, Boolean>> = _likedUpdatePlaylistId
+
     fun updatePlaylistOrder(playlistOrder: PlaylistOrder) {
         _playlistOrder.value = playlistOrder
     }
@@ -24,5 +27,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     fun updatePlaylistLiked(clickedPosition: Int) {
         val clickedPlaylist = _playlists.value?.get(clickedPosition) ?: return
         // TODO 해당 비디오의 Liked update
+
+        _likedUpdatePlaylistId.value = clickedPlaylist.youtubeVideoId to clickedPlaylist.isLiked
     }
 }
