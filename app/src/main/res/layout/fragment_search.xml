@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="view"
+            type="com.cocaine.myply.feature.ui.search.SearchFragment" />
+        <variable
+            name="viewmodel"
+            type="com.cocaine.myply.feature.ui.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +32,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/search_title"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="검색" />
@@ -54,6 +60,7 @@
                 android:layout_height="56dp"
                 android:maxLines="1"
                 android:inputType="text"
+                android:text="@={viewmodel.curSearchMsg}"
                 android:background="@color/white"
                 android:hint="@string/search_placeholder"/>
 
@@ -79,6 +86,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
+            app:singleSelection="true"
             app:layout_constraintStart_toStartOf="@id/search_subtitle"
             app:layout_constraintTop_toBottomOf="@id/search_subtitle" />
 
@@ -87,6 +95,7 @@
             android:layout_width="138dp"
             android:layout_height="142dp"
             android:src="@drawable/ic_no_result"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +108,7 @@
             android:layout_marginTop="32dp"
             android:textAlignment="center"
             android:text="@{@string/search_no_result(``)}"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/search_no_result_img"
             app:layout_constraintStart_toStartOf="@id/search_no_result_img"
             app:layout_constraintEnd_toEndOf="@id/search_no_result_img"/>
@@ -110,10 +120,32 @@
             android:layout_marginTop="24dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_edit_layout"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_playlist"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/search_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_edit_layout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+                <include layout="@layout/item_playlist_shimmer" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <Button
             android:id="@+id/search_btn"
@@ -124,6 +156,7 @@
             android:text="@string/search_btn"
             android:textColor="@color/white"
             android:visibility="invisible"
+            android:onClick="@{() -> view.searchPlayList(viewmodel.curSearchMsg)}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

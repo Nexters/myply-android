@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.cocaine.myply.core.storage.MyPlySharedPreference
 import com.cocaine.myply.feature.data.datasource.local.MyPlyDatabase
+import com.cocaine.myply.feature.data.datasource.remote.MyPlyService
+import com.cocaine.myply.feature.data.repository.MyPlyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,4 +31,8 @@ object StorageModule {
             "MyPlyDatabase"
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun getMyPlyRemoteRepository(myPlyService: MyPlyService) = MyPlyRepository(myPlyService)
 }
