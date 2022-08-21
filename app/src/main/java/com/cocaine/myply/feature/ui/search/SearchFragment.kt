@@ -2,14 +2,13 @@ package com.cocaine.myply.feature.ui.search
 
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentSearchBinding
-import com.cocaine.myply.feature.data.model.VideoResponse
+import com.cocaine.myply.feature.data.model.MusicResponse
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
@@ -76,8 +75,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             }
         }
 
-        viewModel.searchVideoResponse.observe(this) { result ->
-            val curList = mutableListOf<VideoResponse>().apply {
+        viewModel.searchMusicResponse.observe(this) { result ->
+            val curList = mutableListOf<MusicResponse>().apply {
                 addAll(adapter.currentList)
                 if (result != null) addAll(result)
             }

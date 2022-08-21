@@ -22,7 +22,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "https://myply-server-rwwy3wj4sa-du.a.run.app/api/v1/"
+    private const val BASE_URL = BuildConfig.BASE_URL
 
     @Provides
     @Singleton

@@ -8,19 +8,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
-import com.cocaine.myply.feature.data.model.VideoResponse
+import com.cocaine.myply.feature.data.model.MusicResponse
 import com.google.android.material.chip.Chip
 
-class SearchAdapter : ListAdapter<VideoResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
+class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<VideoResponse>() {
-            override fun areItemsTheSame(oldItem: VideoResponse, newItem: VideoResponse): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
+            override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
                 return oldItem === newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: VideoResponse,
-                newItem: VideoResponse
+                oldItem: MusicResponse,
+                newItem: MusicResponse
             ): Boolean {
                 return oldItem.youtubeVideoId == newItem.youtubeVideoId
             }
@@ -30,18 +30,16 @@ class SearchAdapter : ListAdapter<VideoResponse, SearchAdapter.SearchViewHolder>
 
     class SearchViewHolder(private val binding: ItemPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: VideoResponse) {
+        fun bind(data: MusicResponse) {
             binding.video = data
-            data.youtubeTags?.let { tags ->
-                for(i in tags) {
-                    Chip(binding.root.context).apply {
-                        text = i
-                        isCheckable = false
-                        binding.playlistTags.addView(this)
-                    }.setOnCheckedChangeListener { _, b ->
-                        if(b) {
+            data.youtubeTags?.forEach { tag ->
+                Chip(binding.root.context).apply {
+                    text = tag
+                    isCheckable = false
+                    binding.playlistTags.addView(this)
+                }.setOnCheckedChangeListener { _, b ->
+                    if (b) {
 
-                        }
                     }
                 }
             }

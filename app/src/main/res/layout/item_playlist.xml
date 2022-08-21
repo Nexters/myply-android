@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="video"
-            type="com.cocaine.myply.feature.data.model.VideoResponse" />
+            type="com.cocaine.myply.feature.data.model.MusicResponse" />
+        <import type="com.cocaine.myply.feature.data.model.MemoState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="285dp"
+        android:layout_height="wrap_content"
+        android:minHeight="285dp"
         android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:elevation="5dp"
@@ -59,6 +60,7 @@
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/playlist_heart"
+            app:singleLine="true"
             tools:itemCount="4" />
 
         <ImageView
@@ -66,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:src="@{video.liked ? @drawable/ic_like_active : @drawable/ic_like_inactive}"
+            android:src="@{video.memoState == MemoState.FILLED ? @drawable/ic_like_active : @drawable/ic_like_inactive}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

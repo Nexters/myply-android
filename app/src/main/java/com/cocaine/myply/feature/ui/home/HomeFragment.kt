@@ -11,6 +11,7 @@ import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentHomeBinding
 import com.cocaine.myply.databinding.ToastPlaylistDeleteBinding
 import com.cocaine.myply.databinding.ToastPlaylistSaveBinding
+import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.PlaylistOrder
 import com.google.android.material.snackbar.Snackbar
 
@@ -57,10 +58,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.updatePlaylistLiked(clickedPosition)
     }
 
-    private fun showPlaylistLikedToast(playlistId: String, isLiked: Boolean) {
+    private fun showPlaylistLikedToast(playlistId: String, isLiked: MemoState) {
         when (isLiked) {
-            true -> getToastPlaylistDeleteView()
-            false -> getToastPlaylistSaveView(playlistId)
+            MemoState.LIKED, MemoState.FILLED -> getToastPlaylistSaveView(playlistId)
+            else -> getToastPlaylistDeleteView()
         }?.let { toast ->
             binding?.root?.let {
                 Snackbar.make(it, "", Snackbar.LENGTH_SHORT).apply {
