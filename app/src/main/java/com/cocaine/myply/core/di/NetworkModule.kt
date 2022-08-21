@@ -22,7 +22,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = BuildConfig.BASE_URL
+    private val BASE_URL = BuildConfig.BASE_URL
 
     @Provides
     @Singleton

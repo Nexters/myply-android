@@ -20,6 +20,11 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: Decode BASE_URL
+      env:
+        BASEURL: ${{ secrets.BASE_URL }}
+      run: echo BASE_URL=\"$BASEURL\" > ./local.properties
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
