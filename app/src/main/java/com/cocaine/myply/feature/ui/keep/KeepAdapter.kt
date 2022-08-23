@@ -11,10 +11,11 @@ import com.cocaine.myply.databinding.ItemKeepBinding
 import com.cocaine.myply.feature.data.model.MemoResponse
 import com.google.android.material.chip.Chip
 
-class KeepAdapter(private val moveToDetail:(Int) -> Unit) : ListAdapter<MemoResponse, KeepAdapter.KeepViewHolder>(diffUtil) {
+class KeepAdapter(private val moveToDetail: (Int) -> Unit, private val deleteMemo: (Int) -> Unit) :
+    ListAdapter<MemoResponse, KeepAdapter.KeepViewHolder>(diffUtil) {
 
     companion object {
-        val diffUtil = object: DiffUtil.ItemCallback<MemoResponse>() {
+        val diffUtil = object : DiffUtil.ItemCallback<MemoResponse>() {
             override fun areItemsTheSame(oldItem: MemoResponse, newItem: MemoResponse): Boolean {
                 return oldItem === newItem
             }
@@ -25,17 +26,25 @@ class KeepAdapter(private val moveToDetail:(Int) -> Unit) : ListAdapter<MemoResp
         }
     }
 
-    class KeepViewHolder(private val binding: ItemKeepBinding, private val moveToDetail: (Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+    class KeepViewHolder(
+        private val binding: ItemKeepBinding,
+        private val moveToDetail: (Int) -> Unit,
+        private val deleteMemo: (Int) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.keepEditBtn.setOnClickListener {
                 moveToDetail(adapterPosition)
+            }
+
+            binding.keepLike.setOnClickListener {
+                deleteMemo(adapterPosition)
             }
         }
 
         fun bind(memo: MemoResponse) {
             binding.memo = memo
 
-            for(i in memo.keywords) {
+            for (i in memo.keywords) {
                 Chip(binding.root.context).apply {
                     text = i
                     isCheckable = false
@@ -46,8 +55,13 @@ class KeepAdapter(private val moveToDetail:(Int) -> Unit) : ListAdapter<MemoResp
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeepViewHolder {
-        val binding = DataBindingUtil.inflate<ItemKeepBinding>(LayoutInflater.from(parent.context), R.layout.item_keep, parent, false)
-        return KeepViewHolder(binding, moveToDetail)
+        val binding = DataBindingUtil.inflate<ItemKeepBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.item_keep,
+            parent,
+            false
+        )
+        return KeepViewHolder(binding, moveToDetail, deleteMemo)
     }
 
     override fun onBindViewHolder(holder: KeepViewHolder, position: Int) {

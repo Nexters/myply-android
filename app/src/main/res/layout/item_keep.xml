@@ -30,6 +30,7 @@
             tools:background="@color/black" />
 
         <ImageButton
+            android:id="@+id/keep_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_like_active"

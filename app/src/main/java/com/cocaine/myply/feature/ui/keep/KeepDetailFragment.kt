@@ -60,7 +60,8 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
         val controller = findNavController()
 
         if(controller.currentDestination?.id == R.id.keepDetailFragment) {
-            controller.navigate(R.id.action_keepDetailFragment_to_keepShareFragment)
+            val memoData = bundleOf(MEMO_KEY to viewModel.memoDetail.value)
+            controller.navigate(R.id.action_keepDetailFragment_to_keepShareFragment, memoData)
         }
     }
 }

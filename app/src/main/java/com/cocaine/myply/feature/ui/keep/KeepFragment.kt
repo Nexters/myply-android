@@ -25,13 +25,15 @@ class KeepFragment : BaseFragment<FragmentKeepBinding>(R.layout.fragment_keep) {
     }
 
     private fun setRecyclerView() {
-        adapter = KeepAdapter { position ->
+        adapter = KeepAdapter ({ position ->
             val navController = findNavController()
             if(navController.currentDestination?.id == R.id.keepFragment) {
                 val bundle = bundleOf(MEMO_KEY to adapter.currentList[position])
                 navController.navigate(R.id.action_keepFragment_to_keepDetailFragment, bundle)
             }
-        }
+        }, { position ->
+
+        })
 
         binding?.keepMemoList?.adapter = adapter
     }
