@@ -1,6 +1,7 @@
 package com.cocaine.myply.core.di
 
 import com.cocaine.myply.feature.data.repository.MyPlyRepository
+import com.cocaine.myply.feature.ui.home.MusicUseCase
 import com.cocaine.myply.feature.ui.search.SearchUsecase
 import dagger.Module
 import dagger.Provides
@@ -13,4 +14,7 @@ object UsecaseModule {
 
     @Provides
     fun provideSearchUsecase(rep: MyPlyRepository) = SearchUsecase(rep)
+
+    @Provides
+    fun provideMusicUseCase(myPlyRepository: MyPlyRepository) = MusicUseCase(myPlyRepository)
 }
