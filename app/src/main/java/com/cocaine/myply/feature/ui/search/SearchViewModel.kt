@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cocaine.myply.core.base.BaseViewModel
-import com.cocaine.myply.feature.data.model.MusicResponse
+import com.cocaine.myply.feature.data.model.MusicData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,8 +16,8 @@ class SearchViewModel @Inject constructor(private val usecase: SearchUsecase) : 
     private val _recommendKeyword = MutableLiveData<List<String>>()
     val recommendKeyword: LiveData<List<String>> = _recommendKeyword
 
-    private val _searchMusicResponse = MutableLiveData<List<MusicResponse>?>()
-    val searchMusicResponse: LiveData<List<MusicResponse>?> = _searchMusicResponse
+    private val _searchMusicResponse = MutableLiveData<List<MusicData>?>()
+    val searchMusicData: LiveData<List<MusicData>?> = _searchMusicResponse
 
     val curSearchMsg = MutableLiveData<String>()
 
@@ -38,7 +38,7 @@ class SearchViewModel @Inject constructor(private val usecase: SearchUsecase) : 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val result = usecase.searchMusicPlayList(query, _nextPageToken.value)
             withContext(Dispatchers.Main) {
-                _searchMusicResponse.value = result.data?.musics
+                _searchMusicResponse.value = result.data?.music
                 _nextPageToken.value = result.data?.nextPageToken
             }
         }

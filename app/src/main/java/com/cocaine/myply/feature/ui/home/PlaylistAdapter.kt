@@ -8,20 +8,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
-import com.cocaine.myply.feature.data.model.MusicResponse
+import com.cocaine.myply.feature.data.model.MusicData
 
 class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
-    ListAdapter<MusicResponse, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
+    ListAdapter<MusicData, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
-            override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<MusicData>() {
+            override fun areItemsTheSame(oldItem: MusicData, newItem: MusicData): Boolean {
                 return oldItem.youtubeVideoId == newItem.youtubeVideoId
             }
 
             override fun areContentsTheSame(
-                oldItem: MusicResponse,
-                newItem: MusicResponse
+                oldItem: MusicData,
+                newItem: MusicData
             ): Boolean {
                 return oldItem == newItem
             }
@@ -39,7 +39,7 @@ class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
             }
         }
 
-        fun bind(video: MusicResponse) {
+        fun bind(video: MusicData) {
             binding.video = video
         }
     }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentSearchBinding
-import com.cocaine.myply.feature.data.model.MusicResponse
+import com.cocaine.myply.feature.data.model.MusicData
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
@@ -75,8 +75,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             }
         }
 
-        viewModel.searchMusicResponse.observe(this) { result ->
-            val curList = mutableListOf<MusicResponse>().apply {
+        viewModel.searchMusicData.observe(this) { result ->
+            val curList = mutableListOf<MusicData>().apply {
                 addAll(adapter.currentList)
                 if (result != null) addAll(result)
             }

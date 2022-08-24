@@ -6,7 +6,7 @@
     <data>
         <variable
             name="video"
-            type="com.cocaine.myply.feature.data.model.MusicResponse" />
+            type="com.cocaine.myply.feature.data.model.MusicData" />
         <import type="com.cocaine.myply.feature.data.model.MemoState" />
     </data>
 

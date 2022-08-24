@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cocaine.myply.core.base.BaseViewModel
 import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.PlaylistOrder
-import com.cocaine.myply.feature.data.model.MusicResponse
+import com.cocaine.myply.feature.data.model.MusicData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,8 +15,8 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     private val _playlistOrder = MutableLiveData<PlaylistOrder>()
     val playlistOrder: LiveData<PlaylistOrder> = _playlistOrder
 
-    private val _playlists = MutableLiveData<List<MusicResponse>>()
-    val playlists: LiveData<List<MusicResponse>> = _playlists
+    private val _playlists = MutableLiveData<List<MusicData>>()
+    val playlists: LiveData<List<MusicData>> = _playlists
 
     private val _likedUpdatePlaylistId = MutableLiveData<Pair<String, MemoState>>()
     val likedUpdatePlaylistId: LiveData<Pair<String, MemoState>> = _likedUpdatePlaylistId
