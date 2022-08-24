@@ -5,7 +5,6 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentHomeBinding
@@ -14,7 +13,9 @@ import com.cocaine.myply.databinding.ToastPlaylistSaveBinding
 import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.PlaylistOrder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -25,7 +26,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         setPlaylistAdapter()
         setPlaylistChipGroupClickListener()
 
-        setViewModel()
+        setViewModelObserver()
     }
 
     private fun setPlaylistAdapter() {
@@ -45,7 +46,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun setViewModel() {
+    private fun setViewModelObserver() {
+        homeViewModel.playlistOrder.observe(viewLifecycleOwner) {
+            homeViewModel.loadPlaylists()
+        }
         homeViewModel.playlists.observe(viewLifecycleOwner) {
             playlistAdapter.submitList(it)
         }
