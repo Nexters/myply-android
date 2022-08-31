@@ -7,4 +7,6 @@ class MyPlyRepository @Inject constructor(private val myPlyService: MyPlyService
     suspend fun getRecommendKeyword() = myPlyService.requestRecommendTags()
 
     suspend fun searchMusicPlayList(query: String, nextPageToken: String? = null) = myPlyService.searchMusicPlayList(query, nextPageToken)
+
+    suspend fun getUserInfo() = myPlyService.getUserInfo()
 }
