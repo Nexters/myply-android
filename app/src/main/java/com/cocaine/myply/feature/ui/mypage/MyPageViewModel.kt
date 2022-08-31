@@ -4,13 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cocaine.myply.core.base.BaseViewModel
+import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
+import com.cocaine.myply.feature.data.model.UserNameUpdateData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MyPageViewModel @Inject constructor(userInfoUseCase: UserInfoUseCase) : BaseViewModel() {
+class MyPageViewModel @Inject constructor(private val userInfoUseCase: UserInfoUseCase) :
+    BaseViewModel() {
 
     val nickname = MutableLiveData<String>()
 
@@ -36,10 +39,18 @@ class MyPageViewModel @Inject constructor(userInfoUseCase: UserInfoUseCase) : Ba
     }
 
     fun updateKeywords() {
-        // TODO 새로운 키워드 목록을 서버에 반영
+        val keywords = _keywords.value ?: return
+
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            userInfoUseCase.updateUserKeyword(UserKeywordUpdateData(keywords))
+        }
     }
 
     fun updateNickname() {
-        // TODO 새로운 닉네임을 서버에 반영
+        val name = nickname.value ?: return
+
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            userInfoUseCase.updateUserName(UserNameUpdateData(name))
+        }
     }
 }
