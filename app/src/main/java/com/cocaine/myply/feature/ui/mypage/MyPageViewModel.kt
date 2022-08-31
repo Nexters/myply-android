@@ -2,12 +2,15 @@ package com.cocaine.myply.feature.ui.mypage
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.cocaine.myply.core.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MyPageViewModel @Inject constructor(): BaseViewModel() {
+class MyPageViewModel @Inject constructor(userInfoUseCase: UserInfoUseCase) : BaseViewModel() {
 
     val nickname = MutableLiveData<String>()
 
@@ -22,6 +25,15 @@ class MyPageViewModel @Inject constructor(): BaseViewModel() {
     // 사용자가 편집하면서 선택한 키워드
     private val _checkedKeywords = MutableLiveData<List<String>>()
     val checkedKeywords: LiveData<List<String>> = _checkedKeywords
+
+    init {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            userInfoUseCase.getUserInfo().data.let {
+                nickname.postValue(it.name)
+                _keywords.postValue(it.keywords)
+            }
+        }
+    }
 
     fun updateKeywords() {
         // TODO 새로운 키워드 목록을 서버에 반영
