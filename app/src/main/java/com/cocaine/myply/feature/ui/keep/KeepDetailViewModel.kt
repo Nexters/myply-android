@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cocaine.myply.core.base.BaseViewModel
-import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,14 +16,14 @@ class KeepDetailViewModel @Inject constructor(private val usecase: KeepDetailUse
     private val _isWrited = MutableLiveData<Boolean>(false)
     val isWrited: LiveData<Boolean> = _isWrited
 
-    private val _memoDetail = MutableLiveData<MemoResponse>()
-    val memoDetail: LiveData<MemoResponse> = _memoDetail
+    private val _memoDetail = MutableLiveData<MemoInfo>()
+    val memoDetail: LiveData<MemoInfo> = _memoDetail
 
     fun updateIsWritable(writeCount: Int) {
         _isWrited.value = writeCount > 0
     }
 
-    fun updateMemoData(memoResponse: MemoResponse) {
+    fun updateMemoData(memoResponse: MemoInfo) {
         _memoDetail.value = memoResponse
     }
 

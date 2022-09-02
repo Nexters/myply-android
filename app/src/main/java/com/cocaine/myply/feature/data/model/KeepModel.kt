@@ -5,10 +5,12 @@ import kotlinx.android.parcel.Parcelize
 
 data class UserMemoList(val code: Int, val data: Memos?, val message: String?)
 
-data class Memos(val memos: List<MemoResponse>)
+data class Memos(val memos: List<MemoInfo>)
+
+data class MemoResponse(val code: Int, val data: MemoInfo)
 
 @Parcelize
-data class MemoResponse(
+data class MemoInfo(
     val memoID: String,
     val thumbnailURL: String,
     val title: String,

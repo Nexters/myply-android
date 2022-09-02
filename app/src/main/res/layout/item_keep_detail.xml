@@ -6,7 +6,7 @@
     <data>
         <variable
             name="memo"
-            type="com.cocaine.myply.feature.data.model.MemoResponse" />
+            type="com.cocaine.myply.feature.data.model.MemoInfo" />
         <import type="com.cocaine.myply.feature.data.model.MemoState" />
     </data>
 

@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentKeepDetailBinding
-import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.cocaine.myply.feature.ui.keep.KeepFragment.Companion.MEMO_KEY
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +33,7 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
     }
 
     private fun setMemoDetail() {
-        val data = arguments?.getParcelable<MemoResponse>(MEMO_KEY)
+        val data = arguments?.getParcelable<MemoInfo>(MEMO_KEY)
         data?.let {
             viewModel.updateMemoData(it)
 

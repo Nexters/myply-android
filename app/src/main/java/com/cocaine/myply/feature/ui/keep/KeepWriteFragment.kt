@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentKeepWriteBinding
-import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.cocaine.myply.feature.ui.keep.KeepFragment.Companion.MEMO_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +18,7 @@ class KeepWriteFragment: BaseFragment<FragmentKeepWriteBinding>(R.layout.fragmen
         binding?.view = this
         binding?.viewmodel = viewModel
 
-        val data = arguments?.getParcelable<MemoResponse>(MEMO_KEY)
+        val data = arguments?.getParcelable<MemoInfo>(MEMO_KEY)
         data?.let { viewModel.setMemoData(it) }
 
         binding?.keepWriteMemo?.addTextChangedListener {

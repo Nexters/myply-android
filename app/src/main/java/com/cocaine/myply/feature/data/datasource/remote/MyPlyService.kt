@@ -14,7 +14,7 @@ interface MyPlyService {
     suspend fun getUserMemos(): UserMemoList
 
     @PATCH("memos/{memoId}")
-    suspend fun updateMemo(@Path("memoId") memoId: String, @Body body: MemoUpdate): MemoResponse
+    suspend fun updateMemo(@Path("memoId") memoId: String, @Body body: MemoUpdate): MemoInfo
 
     @GET("memos/{memoId}")
     suspend fun getMemo(@Path("memoId") memoId: String): MemoResponse

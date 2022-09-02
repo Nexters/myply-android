@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cocaine.myply.core.base.BaseViewModel
-import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.cocaine.myply.feature.data.model.MemoUpdate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,14 +19,14 @@ class KeepWriteViewModel @Inject constructor(private val usecase: KeepWriteUseca
 
     val memoBody = MutableLiveData<String>()
 
-    private val _memoData = MutableLiveData<MemoResponse>()
-    val memoData: LiveData<MemoResponse> = _memoData
+    private val _memoData = MutableLiveData<MemoInfo>()
+    val memoData: LiveData<MemoInfo> = _memoData
 
     fun updateWordCount(length: Int) {
         _countWord.value = length
     }
 
-    fun setMemoData(memoData: MemoResponse) {
+    fun setMemoData(memoData: MemoInfo) {
         _memoData.value = memoData
         memoBody.value = memoData.body
     }

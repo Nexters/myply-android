@@ -8,19 +8,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemKeepBinding
-import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.google.android.material.chip.Chip
 
 class KeepAdapter(private val moveToDetail: (Int) -> Unit, private val deleteMemo: (Int) -> Unit) :
-    ListAdapter<MemoResponse, KeepAdapter.KeepViewHolder>(diffUtil) {
+    ListAdapter<MemoInfo, KeepAdapter.KeepViewHolder>(diffUtil) {
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MemoResponse>() {
-            override fun areItemsTheSame(oldItem: MemoResponse, newItem: MemoResponse): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<MemoInfo>() {
+            override fun areItemsTheSame(oldItem: MemoInfo, newItem: MemoInfo): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: MemoResponse, newItem: MemoResponse): Boolean {
+            override fun areContentsTheSame(oldItem: MemoInfo, newItem: MemoInfo): Boolean {
                 return oldItem.memoID == newItem.memoID
             }
         }
@@ -41,7 +41,7 @@ class KeepAdapter(private val moveToDetail: (Int) -> Unit, private val deleteMem
             }
         }
 
-        fun bind(memo: MemoResponse) {
+        fun bind(memo: MemoInfo) {
             binding.memo = memo
 
             for (i in memo.keywords) {

@@ -17,6 +17,12 @@ class KeepFragment : BaseFragment<FragmentKeepBinding>(R.layout.fragment_keep) {
         const val MEMO_KEY = "MEMO_DATA"
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getKeepUserMemoList()
+    }
+
     override fun setup() {
         binding?.viewmodel = viewModel
 
