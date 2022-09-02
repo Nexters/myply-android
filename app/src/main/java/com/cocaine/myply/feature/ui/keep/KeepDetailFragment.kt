@@ -29,9 +29,7 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
     override fun onResume() {
         super.onResume()
 
-        viewModel.memoDetail.value?.let { memo ->
-            viewModel.getMemo(memo.memoID)
-        }
+        viewModel.getMemo()
     }
 
     private fun setMemoDetail() {

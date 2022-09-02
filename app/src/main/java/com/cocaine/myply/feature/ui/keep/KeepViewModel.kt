@@ -19,10 +19,7 @@ class KeepViewModel @Inject constructor(private val usecase: KeepUsecase) : Base
     init {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val result = usecase.getUserMemoList()
-
-            withContext(Dispatchers.Main) {
-                _userMemoList.value = result.data?.memos
-            }
+            _userMemoList.postValue(result.data?.memos)
         }
     }
 }

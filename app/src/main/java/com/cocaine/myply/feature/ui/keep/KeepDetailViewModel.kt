@@ -27,12 +27,14 @@ class KeepDetailViewModel @Inject constructor(private val usecase: KeepDetailUse
         _memoDetail.value = memoResponse
     }
 
-    fun getMemo(memoId: String) {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val result = usecase.getMemo(memoId)
+    fun getMemo() {
+        _memoDetail.value?.let { memo ->
+            viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                val result = usecase.getMemo(memo.memoID)
 
-            withContext(Dispatchers.Main) {
-                _memoDetail.value = result
+                withContext(Dispatchers.Main) {
+                    _memoDetail.value = result
+                }
             }
         }
     }
