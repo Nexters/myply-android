@@ -29,6 +29,6 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
         val clickedPlaylist = _playlists.value?.get(clickedPosition) ?: return
         // TODO 해당 비디오의 Liked update
 
-        _likedUpdatePlaylistId.value = clickedPlaylist.youtubeVideoId to clickedPlaylist.memoState
+        _likedUpdatePlaylistId.value = clickedPlaylist.youtubeVideoID to clickedPlaylist.memoState
     }
 }

@@ -22,7 +22,7 @@ class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>
                 oldItem: MusicResponse,
                 newItem: MusicResponse
             ): Boolean {
-                return oldItem.youtubeVideoId == newItem.youtubeVideoId
+                return oldItem.youtubeVideoID == newItem.youtubeVideoID
             }
 
         }

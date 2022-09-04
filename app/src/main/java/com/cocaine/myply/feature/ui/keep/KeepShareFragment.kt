@@ -1,13 +1,12 @@
 package com.cocaine.myply.feature.ui.keep
 
-import android.graphics.Bitmap
-import androidx.core.view.drawToBitmap
 import androidx.fragment.app.viewModels
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentShareBinding
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.cocaine.myply.feature.data.model.ShareColorItem
-import java.io.File
+import com.cocaine.myply.feature.ui.keep.KeepFragment.Companion.MEMO_KEY
 
 class KeepShareFragment : BaseFragment<FragmentShareBinding>(R.layout.fragment_share) {
     private val viewModel: KeepShareViewModel by viewModels()
@@ -16,8 +15,20 @@ class KeepShareFragment : BaseFragment<FragmentShareBinding>(R.layout.fragment_s
     override fun setup() {
         binding?.view = this
         binding?.viewmodel = viewModel
+
+        setRecyclerView()
+        getMemoData()
+    }
+
+    private fun setRecyclerView() {
         adapter = KeepShareAdapter(::getSelectedColorItem, ::updateSelectedColorItem)
         binding?.shareColorList?.adapter = adapter
+    }
+
+    private fun getMemoData() {
+        arguments?.getParcelable<MemoInfo>(MEMO_KEY)?.let {
+            viewModel.setMemoData(it)
+        }
     }
 
     fun showShareMenu() {
