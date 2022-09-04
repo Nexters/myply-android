@@ -1,6 +1,9 @@
 package com.cocaine.myply.feature.ui.search
 
+import android.content.Context
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +30,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         setSearchButtonVisible()
         setViewModel()
         handleError()
+        searchPlayListWithKeyboardEnter()
     }
 
     private fun setRecyclerview() {
@@ -125,5 +129,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         binding?.searchShimmer?.visibility = View.VISIBLE
         viewModel.searchMusicPlayList(query)
+        hideSoftKeyboard()
+    }
+    
+    private fun searchPlayListWithKeyboardEnter() {
+        binding?.searchEditTxt?.setOnKeyListener { view, i, keyEvent ->
+            when(keyEvent.keyCode) {
+                KeyEvent.KEYCODE_ENTER -> {
+                    searchPlayList(viewModel.curSearchMsg.value)
+                }
+            }
+
+            return@setOnKeyListener true
+        }
+    }
+
+    private fun hideSoftKeyboard() {
+        val view = requireView()
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
