@@ -18,4 +18,6 @@ class MyPlyRepository @Inject constructor(private val myPlyService: MyPlyService
 
     suspend fun updateUserKeyword(userKeywordUpdateData: UserKeywordUpdateData) =
         myPlyService.updateUserKeyword(userKeywordUpdateData)
+
+    suspend fun getRecommendTags() = myPlyService.getRecommendTags()
 }

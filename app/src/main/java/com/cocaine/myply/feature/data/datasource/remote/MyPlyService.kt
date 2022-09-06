@@ -2,6 +2,7 @@ package com.cocaine.myply.feature.data.datasource.remote
 
 import com.cocaine.myply.feature.data.model.SearchResponse
 import com.cocaine.myply.feature.data.model.SearchTagResponse
+import com.cocaine.myply.feature.data.model.TagResponse
 import com.cocaine.myply.feature.data.model.UserInfoResponse
 import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
 import com.cocaine.myply.feature.data.model.UserNameUpdateData
@@ -28,4 +29,7 @@ interface MyPlyService {
 
     @PATCH("members")
     suspend fun updateUserKeyword(@Body body: UserKeywordUpdateData): UserInfoResponse
+
+    @GET("tags/recommend")
+    suspend fun getRecommendTags(): TagResponse
 }
