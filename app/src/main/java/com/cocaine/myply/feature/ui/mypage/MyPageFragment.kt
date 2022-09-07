@@ -24,6 +24,11 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         setKeywordObserver()
     }
 
+    override fun onResume() {
+        super.onResume()
+        myPageViewModel.loadMyPageInfo()
+    }
+
     private fun setKeywordAdapter() {
         myPageKeywordAdapter = MyPageKeywordAdapter()
 
