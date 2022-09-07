@@ -9,6 +9,8 @@
 
     <string name="keep">보관함</string>
     <string name="keep_count">뮤직 폴라로이드 %d개</string>
+    <string name="keep_no_memo">플레이리스트가 아직 없어요.</string>
+    <string name="keep_empty">나의 기록을 입력해 주세요.</string>
 
     <string name="search_placeholder">검색어를 입력해주세요.</string>
     <string name="search_subtitle">지금 뜨는 인기 검색어</string>
@@ -61,5 +63,6 @@
     <string name="playlist_write_memo"><u>감상 쓰기</u></string>
     <string name="playlist_save">플레이리스트를 저장했어요.</string>
     <string name="playlist_delete">보관함에서 플레이리스트를 삭제했어요.</string>
+    <string name="keep_no_memo_inform">새로운 플레이리스트를\n보관함에 추가해 보세요.</string>
 
 </resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="memo"
+            type="com.cocaine.myply.feature.data.model.MemoInfo" />
+        <import type="com.cocaine.myply.feature.data.model.MemoState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="285dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
+        android:elevation="5dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/playlist_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="163dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/playlist_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:update_image="@{memo.thumbnailURL}"
+            tools:background="@color/gray_40" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_play_circle"
+            app:layout_constraintEnd_toEndOf="@id/playlist_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/playlist_thumbnail" />
+
+        <TextView
+            android:id="@+id/playlist_title"
+            style="@style/H3_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{memo.title}"
+            android:textColor="@color/gray_80"
+            app:layout_constraintTop_toBottomOf="@id/playlist_thumbnail"
+            tools:text="[Playlist] 백예린의 수족관" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/playlist_tags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/playlist_heart"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/playlist_heart"
+            tools:itemCount="4" />
+
+        <ImageView
+            android:id="@+id/playlist_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_like_active"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/playlist_tags"
+            app:layout_constraintTop_toBottomOf="@id/playlist_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -17,7 +17,7 @@ class SearchViewModel @Inject constructor(private val usecase: SearchUsecase) : 
     val recommendKeyword: LiveData<List<String>> = _recommendKeyword
 
     private val _searchMusicResponse = MutableLiveData<List<MusicData>?>()
-    val searchMusicData: LiveData<List<MusicData>?> = _searchMusicResponse
+    val searchMusicResponse: LiveData<List<MusicData>?> = _searchMusicResponse
 
     val curSearchMsg = MutableLiveData<String>()
 

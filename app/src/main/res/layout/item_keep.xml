@@ -7,14 +7,15 @@
 
         <variable
             name="memo"
-            type="com.cocaine.myply.feature.data.model.MemoResponse" />
+            type="com.cocaine.myply.feature.data.model.MemoInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/white"
-        android:layout_marginBottom="16dp">
+        android:layout_height="wrap_content"
+        android:minHeight="180dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/keep_img"
@@ -22,10 +23,22 @@
             android:layout_height="78dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:update_image="@{memo.thumbnailURL}"
             tools:background="@color/black" />
+
+        <ImageButton
+            android:id="@+id/keep_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_like_active"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toTopOf="@id/keep_img"
+            app:layout_constraintStart_toStartOf="@id/keep_img"/>
 
         <TextView
             android:id="@+id/keep_title"
@@ -33,22 +46,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="15dp"
-            android:lines="2"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:text="@{memo.title}"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/keep_img"
             app:layout_constraintTop_toTopOf="@id/keep_img"
             tools:text="song title\n111" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.google.android.material.chip.ChipGroup
             android:id="@+id/keep_tags"
-            android:layout_width="159dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="@id/keep_title"
             app:layout_constraintTop_toBottomOf="@id/keep_title"
+            app:layout_constraintBottom_toBottomOf="@id/keep_img"
+            app:layout_constraintEnd_toEndOf="@id/keep_title"
+            app:singleLine="true"
             tools:itemCount="5" />
 
         <View
@@ -67,18 +86,21 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="15dp"
+            android:src="@{memo.body != null ? @drawable/ic_edit_active : @drawable/ic_edit_inactive}"
             app:layout_constraintStart_toStartOf="@id/keep_guideline"
-            app:layout_constraintTop_toBottomOf="@id/keep_guideline"
-            tools:background="@color/black" />
+            app:layout_constraintTop_toBottomOf="@id/keep_guideline" />
 
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
+            android:ellipsize="end"
             android:lines="2"
-            android:text="@{memo.body}"
+            android:maxLines="2"
+            android:text="@{memo.body.length() > 0 ? memo.body : @string/keep_empty}"
+            android:textColor="@{memo.body.length() > 0 ? @color/black : @color/gray_60}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/keep_guideline"
             app:layout_constraintStart_toEndOf="@id/keep_edit_btn"

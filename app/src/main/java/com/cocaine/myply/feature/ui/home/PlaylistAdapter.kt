@@ -16,7 +16,7 @@ class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MusicData>() {
             override fun areItemsTheSame(oldItem: MusicData, newItem: MusicData): Boolean {
-                return oldItem.youtubeVideoId == newItem.youtubeVideoId
+                return oldItem.youtubeVideoID == newItem.youtubeVideoID
             }
 
             override fun areContentsTheSame(

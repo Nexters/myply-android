@@ -75,7 +75,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             }
         }
 
-        viewModel.searchMusicData.observe(this) { result ->
+        viewModel.searchMusicResponse.observe(this) { result ->
             val curList = mutableListOf<MusicData>().apply {
                 addAll(adapter.currentList)
                 if (result != null) addAll(result)

@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="view"
             type="com.cocaine.myply.feature.ui.search.SearchFragment" />
+
         <variable
             name="viewmodel"
             type="com.cocaine.myply.feature.ui.search.SearchViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,29 +44,29 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Design.TextInputLayout"
             android:id="@+id/search_edit_layout"
+            style="@style/Widget.Design.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
-            app:layout_constraintStart_toStartOf="@id/search_title"
-            app:layout_constraintTop_toBottomOf="@id/search_title"
-            app:startIconDrawable="@drawable/ic_search_activation"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
-            app:shapeAppearance="?attr/shapeAppearanceLargeComponent">
+            app:layout_constraintStart_toStartOf="@id/search_title"
+            app:layout_constraintTop_toBottomOf="@id/search_title"
+            app:shapeAppearance="?attr/shapeAppearanceLargeComponent"
+            app:startIconDrawable="@drawable/ic_search_activation">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_edit_txt"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:maxLines="1"
-                android:inputType="text"
-                android:text="@={viewmodel.curSearchMsg}"
                 android:background="@color/white"
-                android:hint="@string/search_placeholder"/>
+                android:hint="@string/search_placeholder"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text="@={viewmodel.curSearchMsg}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +80,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
             android:text="@string/search_subtitle"
+            android:visibility="@{viewmodel.searchMusicResponse.size() > 0 ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="@id/search_edit_layout"
             app:layout_constraintTop_toBottomOf="@id/search_edit_layout" />
 
@@ -86,9 +91,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
-            app:singleSelection="true"
+            android:visibility="@{viewmodel.searchMusicResponse.size() > 0 ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="@id/search_subtitle"
-            app:layout_constraintTop_toBottomOf="@id/search_subtitle" />
+            app:layout_constraintTop_toBottomOf="@id/search_subtitle"
+            app:singleSelection="true" />
 
         <ImageView
             android:id="@+id/search_no_result_img"
@@ -97,52 +103,59 @@
             android:src="@drawable/ic_no_result"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_edit_layout"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_edit_layout" />
 
         <TextView
             android:id="@+id/search_no_result_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:textAlignment="center"
             android:text="@{@string/search_no_result(``)}"
+            android:textAlignment="center"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/search_no_result_img"
+            app:layout_constraintEnd_toEndOf="@id/search_no_result_img"
             app:layout_constraintStart_toStartOf="@id/search_no_result_img"
-            app:layout_constraintEnd_toEndOf="@id/search_no_result_img"/>
+            app:layout_constraintTop_toBottomOf="@id/search_no_result_img" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_result_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
             android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_edit_layout"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_playlist"/>
+            tools:listitem="@layout/item_playlist" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/search_shimmer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
             android:layout_marginHorizontal="20dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_edit_layout">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <include layout="@layout/item_playlist_shimmer" />
+
                 <include layout="@layout/item_playlist_shimmer" />
+
                 <include layout="@layout/item_playlist_shimmer" />
+
                 <include layout="@layout/item_playlist_shimmer" />
+
                 <include layout="@layout/item_playlist_shimmer" />
+
                 <include layout="@layout/item_playlist_shimmer" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -153,10 +166,10 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@drawable/primary_button"
+            android:onClick="@{() -> view.searchPlayList(viewmodel.curSearchMsg)}"
             android:text="@string/search_btn"
             android:textColor="@color/white"
             android:visibility="invisible"
-            android:onClick="@{() -> view.searchPlayList(viewmodel.curSearchMsg)}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
