@@ -54,12 +54,13 @@
             android:layout_marginStart="21dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="14dp"
-            android:background="@color/primary_green_light"
+            android:background="@drawable/ic_rectangle_keep_write"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
             android:minHeight="48dp"
             android:paddingStart="16dp"
+            android:text="@{viewmodel.memoData.title}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/keep_write_appbar"
@@ -78,6 +79,7 @@
             android:paddingTop="45dp"
             android:paddingEnd="16dp"
             android:paddingBottom="45dp"
+            android:text="@={viewmodel.memoBody}"
             app:layout_constraintEnd_toEndOf="@id/keep_write_title"
             app:layout_constraintStart_toStartOf="@id/keep_write_title"
             app:layout_constraintTop_toBottomOf="@id/keep_write_title" />
@@ -114,6 +116,7 @@
             android:enabled="@{viewmodel.countWord > 0 ? true : false}"
             android:text="@string/keep_write_save"
             android:textColor="@color/white"
+            android:onClick="@{() -> view.updateMemo(viewmodel.memoBody)}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

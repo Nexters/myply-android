@@ -5,22 +5,28 @@
 
     <data>
 
+        <variable
+            name="viewmodel"
+            type="com.cocaine.myply.feature.ui.keep.KeepViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/beige"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:background="@color/beige">
+        android:paddingEnd="20dp">
 
         <TextView
             android:id="@+id/keep_page_title"
             style="@style/H1_Semibold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginTop="9dp"
             android:text="@string/keep"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,12 +35,37 @@
             style="@style/Body2_Semibold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{@string/keep_count(5)}"
+            android:text="@{viewmodel.userMemoList.size() > 0 ? @string/keep_count(viewmodel.userMemoList.size) : @string/keep_no_memo}"
             android:textColor="@color/gray_60"
             app:layout_constraintTop_toBottomOf="@id/keep_page_title"
-            tools:text="뮤직 폴라로이드 5개"/>
+            tools:text="뮤직 폴라로이드 5개" />
+
+        <ImageView
+            android:id="@+id/keep_no_memo_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_keep"
+            android:visibility="@{viewmodel.userMemoList.size() > 0? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keep_page_subtitle" />
+
+        <TextView
+            style="@style/Body1_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/keep_no_memo_inform"
+            android:textAlignment="center"
+            android:textColor="@color/gray_60"
+            android:visibility="@{viewmodel.userMemoList.size() > 0? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/keep_no_memo_img"
+            app:layout_constraintStart_toStartOf="@id/keep_no_memo_img"
+            app:layout_constraintTop_toBottomOf="@id/keep_no_memo_img" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/keep_memo_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="31dp"

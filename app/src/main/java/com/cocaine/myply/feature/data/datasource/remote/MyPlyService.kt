@@ -1,14 +1,19 @@
 package com.cocaine.myply.feature.data.datasource.remote
 
+import com.cocaine.myply.feature.data.model.MemoInfo
+import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoUpdate
 import com.cocaine.myply.feature.data.model.SearchResponse
 import com.cocaine.myply.feature.data.model.SearchTagResponse
 import com.cocaine.myply.feature.data.model.TagResponse
 import com.cocaine.myply.feature.data.model.UserInfoResponse
 import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
+import com.cocaine.myply.feature.data.model.UserMemoList
 import com.cocaine.myply.feature.data.model.UserNameUpdateData
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MyPlyService {
@@ -16,10 +21,16 @@ interface MyPlyService {
     suspend fun requestRecommendTags(): SearchTagResponse
 
     @GET("musics/search")
-    suspend fun searchMusicPlayList(
-        @Query("q") query: String,
-        @Query("nextToken") nextPageToken: String? = null
-    ): SearchResponse
+    suspend fun searchMusicPlayList(@Query("q") query: String, @Query("nextToken")nextPageToken: String? = null): SearchResponse
+
+    @GET("memos")
+    suspend fun getUserMemos(): UserMemoList
+
+    @PATCH("memos/{memoId}")
+    suspend fun updateMemo(@Path("memoId") memoId: String, @Body body: MemoUpdate): MemoInfo
+
+    @GET("memos/{memoId}")
+    suspend fun getMemo(@Path("memoId") memoId: String): MemoResponse
 
     @GET("members")
     suspend fun getUserInfo(): UserInfoResponse

@@ -1,14 +1,16 @@
 package com.cocaine.myply.feature.ui.keep
 
-import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentKeepDetailBinding
+import com.cocaine.myply.feature.data.model.MemoInfo
+import com.cocaine.myply.feature.ui.keep.KeepFragment.Companion.MEMO_KEY
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragment_keep_detail) {
@@ -18,15 +20,37 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
         binding?.view = this
         binding?.viewModel = viewModel
 
+        setMemoDetail()
         binding?.keepDetailMemo?.addTextChangedListener {
             it?.length?.let { len -> viewModel.updateIsWritable(len) }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getMemo()
+    }
+
+    private fun setMemoDetail() {
+        val data = arguments?.getParcelable<MemoInfo>(MEMO_KEY)
+        data?.let {
+            viewModel.updateMemoData(it)
+
+            for(i in it.keywords) {
+                Chip(requireContext()).apply {
+                    text = i
+                    binding?.keepDetailPlaylist?.playlistTags?.addView(this)
+                }
+            }
         }
     }
 
     fun moveToKeepWrite() {
         val controller = findNavController()
         if(controller.currentDestination?.id == R.id.keepDetailFragment) {
-            controller.navigate(R.id.action_keepDetailFragment_to_keepWriteFragment)
+            val memoData = bundleOf(MEMO_KEY to viewModel.memoDetail.value)
+            controller.navigate(R.id.action_keepDetailFragment_to_keepWriteFragment, memoData)
         }
     }
 
@@ -34,7 +58,8 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
         val controller = findNavController()
 
         if(controller.currentDestination?.id == R.id.keepDetailFragment) {
-            controller.navigate(R.id.action_keepDetailFragment_to_keepShareFragment)
+            val memoData = bundleOf(MEMO_KEY to viewModel.memoDetail.value)
+            controller.navigate(R.id.action_keepDetailFragment_to_keepShareFragment, memoData)
         }
     }
 }
