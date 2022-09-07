@@ -51,10 +51,11 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
+            android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/mypage_my_keyword"
             app:layout_constraintStart_toEndOf="@id/mypage_my_keyword"
             app:layout_constraintTop_toTopOf="@id/mypage_my_keyword"
-            tools:background="@color/black" />
+            app:tint="@color/gray_50" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mypage_my_keyword_list"
@@ -140,10 +141,10 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right"
             app:layout_constraintBottom_toBottomOf="@id/mypage_team"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/mypage_team"
-            tools:background="@color/black" />
+            app:layout_constraintTop_toTopOf="@id/mypage_team" />
 
         <View
             style="@style/Divider"
@@ -172,10 +173,10 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right"
             app:layout_constraintBottom_toBottomOf="@id/mypage_open_source"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/mypage_open_source"
-            tools:background="@color/black" />
+            app:layout_constraintTop_toTopOf="@id/mypage_open_source" />
 
         <TextView
             android:id="@+id/mypage_user_support"
@@ -208,10 +209,10 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right"
             app:layout_constraintBottom_toBottomOf="@id/mypage_edit_nickname"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/mypage_edit_nickname"
-            tools:background="@color/black" />
+            app:layout_constraintTop_toTopOf="@id/mypage_edit_nickname" />
 
         <TextView
             android:id="@+id/mypage_contact"
@@ -232,9 +233,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right"
             app:layout_constraintBottom_toBottomOf="@id/mypage_contact"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/mypage_contact"
-            tools:background="@color/black" />
+            app:layout_constraintTop_toTopOf="@id/mypage_contact" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
