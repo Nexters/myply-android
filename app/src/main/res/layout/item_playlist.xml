@@ -29,6 +29,7 @@
             tools:background="@color/gray_40" />
 
         <ImageView
+            android:id="@+id/playlist_play_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -48,31 +49,40 @@
             android:text="@{video.title}"
             android:textColor="@color/gray_80"
             app:layout_constraintTop_toBottomOf="@id/playlist_thumbnail"
-            tools:text="[Playlist] 백예린의 수족관" />
+            tools:text="[Playlist] 백예린의 수족관"
+            tools:background="@android:color/transparent"/>
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/playlist_tags"
+        <HorizontalScrollView
+            android:id="@+id/playlist_tags_scroll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toStartOf="@id/playlist_heart"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/playlist_heart"
-            app:singleLine="true"
-            tools:itemCount="4" />
+            app:layout_constraintBottom_toBottomOf="@id/playlist_heart"
+            tools:background="@android:color/transparent">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/playlist_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:singleLine="true"
+                tools:itemCount="4" />
+        </HorizontalScrollView>
 
         <ImageView
             android:id="@+id/playlist_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:src="@{video.memoState == MemoState.FILLED ? @drawable/ic_like_active : @drawable/ic_like_inactive}"
+            android:src="@{video.memoState == MemoState.EMPTY ? @drawable/ic_like_inactive : @drawable/ic_like_active}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@id/playlist_tags"
+            app:layout_constraintStart_toEndOf="@id/playlist_tags_scroll"
             app:layout_constraintTop_toBottomOf="@id/playlist_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

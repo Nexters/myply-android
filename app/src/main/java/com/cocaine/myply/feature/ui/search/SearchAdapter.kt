@@ -1,6 +1,8 @@
 package com.cocaine.myply.feature.ui.search
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -15,7 +17,8 @@ import com.cocaine.myply.feature.data.model.MusicResponse
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 
-class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
+class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) :
+    ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
             override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
@@ -32,7 +35,10 @@ class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) : ListAdapt
         }
     }
 
-    class SearchViewHolder(private val binding: ItemPlaylistBinding, private val getYoutubeId: (Int, String) -> Unit) :
+    class SearchViewHolder(
+        private val binding: ItemPlaylistBinding,
+        private val getYoutubeId: (Int, String) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: MusicResponse) {
             binding.video = data
@@ -59,9 +65,17 @@ class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) : ListAdapt
             }
 
             binding.playlistHeart.setOnClickListener {
-                binding.video = data.copy(memoState = MemoState.LIKED)
-                android.util.Log.e("video", "${binding.video.toString()}")
+                binding.video = data.copy(memoState = MemoState.FILLED)
                 getYoutubeId(adapterPosition, data.youtubeVideoID)
+            }
+
+            binding.playlistPlayBtn.setOnClickListener {
+                kotlin.runCatching {
+                    binding.root.context.startActivity(
+                        Intent(Intent.ACTION_VIEW).setData(Uri.parse(data.videoDeepLink))
+                            .setPackage("com.google.android.youtube")
+                    )
+                }
             }
         }
     }
