@@ -1,5 +1,6 @@
 package com.cocaine.myply.feature.ui.search
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,10 +9,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
+import com.cocaine.myply.feature.data.model.ChipStyles
+import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.MusicResponse
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 
-class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
+class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
             override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
@@ -28,20 +32,36 @@ class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>
         }
     }
 
-    class SearchViewHolder(private val binding: ItemPlaylistBinding) :
+    class SearchViewHolder(private val binding: ItemPlaylistBinding, private val getYoutubeId: (Int, String) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: MusicResponse) {
             binding.video = data
-            data.youtubeTags?.forEach { tag ->
+            val chipStyles = ChipStyles.values()
+            data.youtubeTags?.forEachIndexed { i, tag ->
+                val chipDrawable = ChipDrawable.createFromAttributes(
+                    binding.root.context,
+                    null,
+                    0,
+                    chipStyles[i % chipStyles.size].id
+                )
                 Chip(binding.root.context).apply {
                     text = tag
                     isCheckable = false
-                    binding.playlistTags.addView(this)
-                }.setOnCheckedChangeListener { _, b ->
-                    if (b) {
+                    isClickable = false
 
-                    }
+                    setTextColor(Color.WHITE)
+                    setTextAppearance(R.style.Body2_Semibold)
+
+                    setChipDrawable(chipDrawable)
+
+                    binding.playlistTags.addView(this)
                 }
+            }
+
+            binding.playlistHeart.setOnClickListener {
+                binding.video = data.copy(memoState = MemoState.LIKED)
+                android.util.Log.e("video", "${binding.video.toString()}")
+                getYoutubeId(adapterPosition, data.youtubeVideoID)
             }
         }
     }
@@ -53,7 +73,7 @@ class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>
             parent,
             false
         )
-        return SearchViewHolder(binding)
+        return SearchViewHolder(binding, getYoutubeId)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

@@ -1,6 +1,7 @@
 package com.cocaine.myply.feature.ui.search
 
 import android.content.Context
+import android.graphics.Color
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentSearchBinding
+import com.cocaine.myply.feature.data.model.ChipStyles
 import com.cocaine.myply.feature.data.model.MusicResponse
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
@@ -34,7 +37,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     private fun setRecyclerview() {
-        adapter = SearchAdapter()
+        adapter = SearchAdapter{ adapterPosition, youtubeId ->
+            viewModel.addMemo(youtubeId)
+            adapter.notifyItemChanged(adapterPosition)
+        }
         binding?.searchResultList?.adapter = adapter
 
         binding?.searchResultList?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -67,10 +73,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             val size = recommend.size - 1
             val randomNumbers = List(6) { Random.nextInt(0, size) }
 
+            val chipStyles = ChipStyles.values()
             for (i in randomNumbers) {
+                val chipDrawable = ChipDrawable.createFromAttributes(requireContext(), null, 0, chipStyles[i % chipStyles.size].id)
                 Chip(requireContext()).apply {
                     text = recommend[i]
-                    setOnClickListener { view->
+                    setTextColor(Color.WHITE)
+                    setTextAppearance(R.style.Body2_Bold)
+
+                    setChipDrawable(chipDrawable)
+
+                    setOnClickListener { view ->
                         binding?.searchEditTxt?.setText(recommend[i])
                         searchPlayList(recommend[i])
                     }
@@ -131,12 +144,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         viewModel.searchMusicPlayList(query)
         hideSoftKeyboard()
     }
-    
+
     private fun searchPlayListWithKeyboardEnter() {
         binding?.searchEditTxt?.setOnKeyListener { view, i, keyEvent ->
-            when(keyEvent.keyCode) {
+            when (keyEvent.keyCode) {
                 KeyEvent.KEYCODE_ENTER -> {
                     searchPlayList(viewModel.curSearchMsg.value)
+                }
+
+                KeyEvent.KEYCODE_BACK -> {
+                    binding?.searchEditTxt?.text?.clear()
                 }
             }
 
@@ -146,7 +163,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     private fun hideSoftKeyboard() {
         val view = requireView()
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
