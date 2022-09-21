@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="keyword"
             type="String" />
@@ -15,6 +16,7 @@
         android:layout_marginBottom="8dp">
 
         <TextView
+            android:id="@+id/keyword_view"
             style="@style/Body2_Semibold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,7 +24,6 @@
             android:paddingVertical="3dp"
             android:text="@{@string/hash_keyword(keyword)}"
             android:textColor="@color/white"
-            tools:background="@color/secondary_red"
             tools:text="#재즈" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.cocaine.myply.feature.ui.mypage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -27,8 +28,22 @@ class MyPageKeywordAdapter :
     class MyPageKeywordViewHolder(private val binding: ItemMypageKeywordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private val keywordColorList = listOf(
+            R.color.secondary_red,
+            R.color.secondary_yellow,
+            R.color.primary_green_light,
+            R.color.secondary_blue
+        )
+
         fun bind(keyword: String) {
             binding.keyword = keyword
+
+            binding.keywordView.setBackgroundColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    keywordColorList.random()
+                )
+            )
         }
     }
 
