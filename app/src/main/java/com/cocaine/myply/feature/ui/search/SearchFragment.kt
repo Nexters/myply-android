@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentSearchBinding
-import com.cocaine.myply.feature.data.model.ChipStyles
 import com.cocaine.myply.feature.data.model.MusicResponse
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
@@ -73,9 +72,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             val size = recommend.size - 1
             val randomNumbers = List(6) { Random.nextInt(0, size) }
 
-            val chipStyles = ChipStyles.values()
+            val chipStyles = listOf(
+                R.style.MyPly_Chip_Red, R.style.MyPly_Chip_green, R.style.MyPly_Chip_yellow, R.style.MyPly_Chip_Blue
+            )
+
             for (i in randomNumbers) {
-                val chipDrawable = ChipDrawable.createFromAttributes(requireContext(), null, 0, chipStyles[i % chipStyles.size].id)
+                val chipDrawable = ChipDrawable.createFromAttributes(requireContext(), null, 0, chipStyles.random())
                 Chip(requireContext()).apply {
                     text = recommend[i]
                     setTextColor(Color.WHITE)

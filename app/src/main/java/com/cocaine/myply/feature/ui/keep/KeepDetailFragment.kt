@@ -1,6 +1,5 @@
 package com.cocaine.myply.feature.ui.keep
 
-import android.graphics.Color
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -15,8 +14,6 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +37,7 @@ class KeepDetailFragment: BaseFragment<FragmentKeepDetailBinding>(R.layout.fragm
     }
 
     private fun setMemoDetail() {
-        val adapter = KeepDetailAdapter()
+        val adapter = KeepTagAdapter()
         binding?.keepDetailPlaylist?.playlistTags?.layoutManager = FlexboxLayoutManager(requireContext()).apply{
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW

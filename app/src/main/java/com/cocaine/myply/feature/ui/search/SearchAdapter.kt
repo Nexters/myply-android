@@ -1,21 +1,18 @@
 package com.cocaine.myply.feature.ui.search
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.util.rangeTo
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
-import com.cocaine.myply.feature.data.model.ChipStyles
 import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.MusicResponse
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 
 class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) :
     ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
@@ -40,28 +37,13 @@ class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) :
         private val getYoutubeId: (Int, String) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
+        private val adapter = SearchTagAdapter()
         fun bind(data: MusicResponse) {
             binding.video = data
-            val chipStyles = ChipStyles.values()
-            data.youtubeTags?.forEachIndexed { i, tag ->
-                val chipDrawable = ChipDrawable.createFromAttributes(
-                    binding.root.context,
-                    null,
-                    0,
-                    chipStyles[i % chipStyles.size].id
-                )
-                Chip(binding.root.context).apply {
-                    text = tag
-                    isCheckable = false
-                    isClickable = false
 
-                    setTextColor(Color.WHITE)
-                    setTextAppearance(R.style.Body2_Semibold)
-
-                    setChipDrawable(chipDrawable)
-
-                    binding.playlistTags.addView(this)
-                }
+            binding.playlistTags.adapter = adapter
+            data.youtubeTags?.let {
+                adapter.submitList(it)
             }
 
             binding.playlistHeart.setOnClickListener {
