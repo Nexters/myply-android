@@ -1,11 +1,20 @@
 package com.cocaine.myply.feature.data.datasource.remote
 
-import com.cocaine.myply.feature.data.model.*
-import retrofit2.http.*
+import com.cocaine.myply.feature.data.model.MemoInfo
+import com.cocaine.myply.feature.data.model.MemoResponse
+import com.cocaine.myply.feature.data.model.MemoUpdate
 import com.cocaine.myply.feature.data.model.MusicResponse
 import com.cocaine.myply.feature.data.model.SearchResponse
 import com.cocaine.myply.feature.data.model.SearchTagResponse
+import com.cocaine.myply.feature.data.model.TagResponse
+import com.cocaine.myply.feature.data.model.UserInfoResponse
+import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
+import com.cocaine.myply.feature.data.model.UserMemoList
+import com.cocaine.myply.feature.data.model.UserNameUpdateData
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MyPlyService {
@@ -32,4 +41,16 @@ interface MyPlyService {
 
     @GET("musics/preference")
     suspend fun getPreferenceMusicPlaylist(@Query("nextToken") nextPageToken: String?): MusicResponse
+
+    @GET("members")
+    suspend fun getUserInfo(): UserInfoResponse
+
+    @PATCH("members")
+    suspend fun updateUserName(@Body body: UserNameUpdateData): UserInfoResponse
+
+    @PATCH("members")
+    suspend fun updateUserKeyword(@Body body: UserKeywordUpdateData): UserInfoResponse
+
+    @GET("tags/recommend")
+    suspend fun getRecommendTags(): TagResponse
 }

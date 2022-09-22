@@ -17,10 +17,12 @@ class MyPageEditFragment : BaseFragment<FragmentMypageEditBinding>(R.layout.frag
         setKeywordAdapter()
         setKeywordUpdateConfirmClickListener()
         setKeywordObserver()
+
+        myPageViewModel.loadRecommendTags()
     }
 
     private fun setKeywordAdapter() {
-        myPageEditKeywordAdapter = MyPageEditKeywordAdapter()
+        myPageEditKeywordAdapter = MyPageEditKeywordAdapter(::onClickKeyword)
         binding?.mypageEditList?.adapter = myPageEditKeywordAdapter
 
         myPageKeywordAdapter = MyPageKeywordAdapter()
@@ -37,8 +39,12 @@ class MyPageEditFragment : BaseFragment<FragmentMypageEditBinding>(R.layout.frag
         myPageViewModel.baseKeywords.observe(viewLifecycleOwner) {
             myPageEditKeywordAdapter.submitList(it)
         }
-        myPageViewModel.checkedKeywords.observe(viewLifecycleOwner) {
+        myPageViewModel.clickedKeywords.observe(viewLifecycleOwner) {
             myPageKeywordAdapter.submitList(it)
         }
+    }
+
+    private fun onClickKeyword(keyword: String) {
+        myPageViewModel.updateKeywordClickStatus(keyword)
     }
 }
