@@ -15,10 +15,6 @@ class KeepViewModel @Inject constructor(private val usecase: KeepUsecase) : Base
     private val _userMemoList = MutableLiveData<List<MemoInfo>>()
     val userMemoList: LiveData<List<MemoInfo>> = _userMemoList
 
-    init {
-        getKeepUserMemoList()
-    }
-
     fun getKeepUserMemoList() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val result = usecase.getUserMemoList()

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemKeepBinding
 import com.cocaine.myply.feature.data.model.MemoInfo
-import com.google.android.material.chip.Chip
 
 class KeepAdapter(private val moveToDetail: (Int) -> Unit, private val deleteMemo: (Int) -> Unit) :
     ListAdapter<MemoInfo, KeepAdapter.KeepViewHolder>(diffUtil) {
@@ -31,6 +30,7 @@ class KeepAdapter(private val moveToDetail: (Int) -> Unit, private val deleteMem
         private val moveToDetail: (Int) -> Unit,
         private val deleteMemo: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+        private val tagAdapter = KeepTagAdapter()
         init {
             binding.keepEditBtn.setOnClickListener {
                 moveToDetail(adapterPosition)
@@ -43,13 +43,9 @@ class KeepAdapter(private val moveToDetail: (Int) -> Unit, private val deleteMem
 
         fun bind(memo: MemoInfo) {
             binding.memo = memo
-
-            for (i in memo.keywords) {
-                Chip(binding.root.context).apply {
-                    text = i
-                    isCheckable = false
-                    binding.keepTags.addView(this)
-                }
+            memo.keywords?.let { tags ->
+                binding.keepTags.adapter = tagAdapter
+                tagAdapter.submitList(tags)
             }
         }
     }

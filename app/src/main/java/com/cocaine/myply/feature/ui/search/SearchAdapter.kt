@@ -1,17 +1,21 @@
 package com.cocaine.myply.feature.ui.search
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.util.rangeTo
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
+import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.MusicResponse
-import com.google.android.material.chip.Chip
 
-class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
+class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) :
+    ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
             override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
@@ -28,19 +32,31 @@ class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>
         }
     }
 
-    class SearchViewHolder(private val binding: ItemPlaylistBinding) :
+    class SearchViewHolder(
+        private val binding: ItemPlaylistBinding,
+        private val getYoutubeId: (Int, String) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
+        private val adapter = SearchTagAdapter()
         fun bind(data: MusicResponse) {
             binding.video = data
-            data.youtubeTags?.forEach { tag ->
-                Chip(binding.root.context).apply {
-                    text = tag
-                    isCheckable = false
-                    binding.playlistTags.addView(this)
-                }.setOnCheckedChangeListener { _, b ->
-                    if (b) {
 
-                    }
+            binding.playlistTags.adapter = adapter
+            data.youtubeTags?.let {
+                adapter.submitList(it)
+            }
+
+            binding.playlistHeart.setOnClickListener {
+                binding.video = data.copy(memoState = MemoState.FILLED)
+                getYoutubeId(adapterPosition, data.youtubeVideoID)
+            }
+
+            binding.playlistPlayBtn.setOnClickListener {
+                kotlin.runCatching {
+                    binding.root.context.startActivity(
+                        Intent(Intent.ACTION_VIEW).setData(Uri.parse(data.videoDeepLink))
+                            .setPackage("com.google.android.youtube")
+                    )
                 }
             }
         }
@@ -53,7 +69,7 @@ class SearchAdapter : ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>
             parent,
             false
         )
-        return SearchViewHolder(binding)
+        return SearchViewHolder(binding, getYoutubeId)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

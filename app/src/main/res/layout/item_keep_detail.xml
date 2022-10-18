@@ -4,19 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="memo"
             type="com.cocaine.myply.feature.data.model.MemoInfo" />
+
         <import type="com.cocaine.myply.feature.data.model.MemoState" />
+
+        <variable
+            name="listener"
+            type="com.cocaine.myply.feature.ui.keep.KeepDetailFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="285dp"
         android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:elevation="5dp"
+        android:minHeight="285dp"
         android:padding="16dp">
 
         <ImageView
@@ -51,21 +57,24 @@
             app:layout_constraintTop_toBottomOf="@id/playlist_thumbnail"
             tools:text="[Playlist] 백예린의 수족관" />
 
-        <com.google.android.material.chip.ChipGroup
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlist_tags"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
             app:layout_constraintEnd_toStartOf="@id/playlist_heart"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/playlist_heart"
-            tools:itemCount="4" />
+            tools:itemCount="4"
+            tools:listitem="@layout/item_mypage_keyword" />
 
         <ImageView
             android:id="@+id/playlist_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:onClick="@{() -> listener.deleteMemo()}"
             android:src="@drawable/ic_like_active"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
