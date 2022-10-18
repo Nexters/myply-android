@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_keepDetailFragment_to_keepShareFragment"
             app:destination="@id/keepShareFragment" />
+        <action
+            android:id="@+id/action_keepDetailFragment_to_myPlyTwoButtonDialog"
+            app:destination="@id/myPlyTwoButtonDialog" />
     </fragment>
     <fragment
         android:id="@+id/keepWriteFragment"
@@ -69,4 +72,8 @@
         android:id="@+id/onBoardingFragment"
         android:name="com.cocaine.myply.feature.ui.onboarding.OnBoardingFragment"
         android:label="OnBoardingFragment" />
+    <dialog
+        android:id="@+id/myPlyTwoButtonDialog"
+        android:name="com.cocaine.myply.feature.ui.dialog.MyPlyTwoButtonDialog"
+        android:label="MyPlyTwoButtonDialog" />
 </navigation>

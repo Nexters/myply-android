@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/beige"
+        android:minWidth="295dp"
+        android:minHeight="158dp">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            style="@style/Body1_Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/gray_90"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@android:color/transparent"
+            tools:text="title" />
+
+        <TextView
+            android:id="@+id/dialog_subtitle"
+            style="@style/Body2_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_60"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_title"
+            tools:background="@android:color/transparent"
+            tools:text="subtitle" />
+
+        <Button
+            android:id="@+id/dialog_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@drawable/dialog_negative_btn"
+            android:minWidth="120dp"
+            android:textColor="@color/gray_70"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dialog_positive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_subtitle"
+            tools:text="취소" />
+
+        <Button
+            android:id="@+id/dialog_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@drawable/dialog_positive_btn"
+            android:minWidth="120dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dialog_negative"
+            app:layout_constraintTop_toBottomOf="@id/dialog_subtitle"
+            tools:text="삭제" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
