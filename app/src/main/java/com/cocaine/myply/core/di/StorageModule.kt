@@ -34,5 +34,6 @@ object StorageModule {
 
     @Provides
     @Singleton
-    fun getMyPlyRemoteRepository(myPlyService: MyPlyService) = MyPlyRepository(myPlyService)
+    fun getMyPlyRemoteRepository(myPlyService: MyPlyService, @ApplicationContext context: Context) =
+        MyPlyRepository(myPlyService, context)
 }

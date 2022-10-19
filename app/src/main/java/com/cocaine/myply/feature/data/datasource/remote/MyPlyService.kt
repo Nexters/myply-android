@@ -22,6 +22,9 @@ interface MyPlyService {
     @GET("members")
     suspend fun getUserInfo(): UserInfoResponse
 
+    @POST("members/")
+    suspend fun signupUser(@Body body: UserInfoData): UserInfoResponse
+
     @PATCH("members")
     suspend fun updateUserName(@Body body: UserNameUpdateData): UserInfoResponse
 
