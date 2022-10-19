@@ -1,5 +1,6 @@
 package com.cocaine.myply.feature.ui.onboarding
 
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
@@ -11,16 +12,22 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(R.layout.frag
         const val PAGE_SIZE = 3
     }
 
-    private val callback = object: ViewPager2.OnPageChangeCallback() {
+    private val callback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
 
-            when(position) {
+            when (position) {
                 PAGE_SIZE - 1 -> {
                     binding?.onboardingBtn?.apply {
                         text = getString(R.string.onboarding_start_btn)
 
-                        //TODO : Movoe to sign up
+                        setOnClickListener {
+                            findNavController().let { controller ->
+                                if (controller.currentDestination?.id == R.id.onBoardingFragment) {
+                                    controller.navigate(R.id.action_onBoardingFragment_to_signupNicknameFragment)
+                                }
+                            }
+                        }
                     }
                 }
                 else -> {
