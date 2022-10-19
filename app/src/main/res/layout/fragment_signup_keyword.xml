@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/signup_edit_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_back"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_close" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <TextView
+            android:id="@+id/signup_edit_subtitle"
+            style="@style/H1_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/mypage_edit_subtitle"
+            android:textColor="@color/gray_80"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signup_edit_toolbar" />
+
+        <TextView
+            android:id="@+id/signup_edit_desc"
+            style="@style/Body2_Semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/mypage_edit_desc"
+            android:textColor="@color/gray_60"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signup_edit_subtitle" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/signup_recommend_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/signup_edit_divider"
+            app:layout_constraintTop_toBottomOf="@id/signup_edit_desc"
+            tools:itemCount="20"
+            tools:listitem="@layout/item_mypage_edit_keyword" />
+
+        <View
+            android:id="@+id/signup_edit_divider"
+            style="@style/Divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toTopOf="@id/signup_selected_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/signup_selected_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="9dp"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/signup_start_btn"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_mypage_keyword" />
+
+        <Button
+            android:id="@+id/signup_start_btn"
+            style="@style/Body1_Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/primary_button"
+            android:text="@string/mypage_edit_start_btn"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
