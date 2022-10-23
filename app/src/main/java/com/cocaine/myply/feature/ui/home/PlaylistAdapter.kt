@@ -1,5 +1,7 @@
 package com.cocaine.myply.feature.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
 import com.cocaine.myply.feature.data.model.MusicData
+import com.cocaine.myply.feature.ui.search.SearchTagAdapter
 
 class PlaylistAdapter(private val onLikedClick: (Boolean, String) -> Unit) :
     ListAdapter<MusicData, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
@@ -32,8 +35,24 @@ class PlaylistAdapter(private val onLikedClick: (Boolean, String) -> Unit) :
         private val binding: ItemPlaylistBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private val tagAdapter = SearchTagAdapter()
+
         fun bind(video: MusicData, onLikedClick: (Boolean, String) -> Unit) {
             binding.video = video
+
+            binding.playlistTags.adapter = tagAdapter
+            video.youtubeTags?.let {
+                tagAdapter.submitList(it)
+            }
+
+            binding.playlistPlayBtn.setOnClickListener {
+                kotlin.runCatching {
+                    binding.root.context.startActivity(
+                        Intent(Intent.ACTION_VIEW).setData(Uri.parse(video.videoDeepLink))
+                            .setPackage("com.google.android.youtube")
+                    )
+                }
+            }
 
             binding.playlistHeart.setOnClickListener {
                 onLikedClick(video.isMemoed, video.youtubeVideoID)
