@@ -12,10 +12,12 @@ data class MemoResponse(val code: Int, val data: MemoInfo)
 @Parcelize
 data class MemoInfo(
     val memoID: String,
-    val thumbnailURL: String,
+    val thumbnailURL: String?,
     val title: String,
-    val keywords: List<String>,
+    val keywords: List<String>?,
     val body: String
 ) : Parcelable
 
 data class MemoUpdate(val body: String)
+
+data class MemoRequest(val youtubeVideoID: String, val body: String)

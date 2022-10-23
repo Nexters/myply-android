@@ -1,6 +1,10 @@
 package com.cocaine.myply.feature.ui.search
 
+import android.content.Context
+import android.graphics.Color
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +14,7 @@ import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentSearchBinding
 import com.cocaine.myply.feature.data.model.MusicData
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
@@ -27,10 +32,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         setSearchButtonVisible()
         setViewModel()
         handleError()
+        searchPlayListWithKeyboardEnter()
     }
 
     private fun setRecyclerview() {
-        adapter = SearchAdapter()
+        adapter = SearchAdapter{ adapterPosition, youtubeId ->
+            viewModel.addMemo(youtubeId)
+            adapter.notifyItemChanged(adapterPosition)
+        }
         binding?.searchResultList?.adapter = adapter
 
         binding?.searchResultList?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -63,10 +72,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             val size = recommend.size - 1
             val randomNumbers = List(6) { Random.nextInt(0, size) }
 
+            val chipStyles = listOf(
+                R.style.MyPly_Chip_Red, R.style.MyPly_Chip_green, R.style.MyPly_Chip_yellow, R.style.MyPly_Chip_Blue
+            )
+
             for (i in randomNumbers) {
+                val chipDrawable = ChipDrawable.createFromAttributes(requireContext(), null, 0, chipStyles.random())
                 Chip(requireContext()).apply {
                     text = recommend[i]
-                    setOnClickListener { view->
+                    setTextColor(Color.WHITE)
+                    setTextAppearance(R.style.Body2_Bold)
+
+                    setChipDrawable(chipDrawable)
+
+                    setOnClickListener { view ->
                         binding?.searchEditTxt?.setText(recommend[i])
                         searchPlayList(recommend[i])
                     }
@@ -125,5 +144,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         binding?.searchShimmer?.visibility = View.VISIBLE
         viewModel.searchMusicPlayList(query)
+        hideSoftKeyboard()
+    }
+
+    private fun searchPlayListWithKeyboardEnter() {
+        binding?.searchEditTxt?.setOnKeyListener { view, i, keyEvent ->
+            when (keyEvent.keyCode) {
+                KeyEvent.KEYCODE_ENTER -> {
+                    searchPlayList(viewModel.curSearchMsg.value)
+                }
+
+                KeyEvent.KEYCODE_BACK -> {
+                    binding?.searchEditTxt?.text?.clear()
+                }
+            }
+
+            return@setOnKeyListener true
+        }
+    }
+
+    private fun hideSoftKeyboard() {
+        val view = requireView()
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

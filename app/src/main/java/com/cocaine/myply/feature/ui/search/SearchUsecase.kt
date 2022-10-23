@@ -7,4 +7,6 @@ class SearchUsecase @Inject constructor(private val myPlyRemoteRepository: MyPly
     suspend fun getRecommendKeyworkd() = myPlyRemoteRepository.getRecommendKeyword()
 
     suspend fun searchMusicPlayList(query: String, nextPageToken: String? = null) = myPlyRemoteRepository.searchMusicPlayList(query, nextPageToken)
+
+    suspend fun addMemo(youtubeId: String, body: String = "") = myPlyRemoteRepository.addMemo(youtubeId, body)
 }

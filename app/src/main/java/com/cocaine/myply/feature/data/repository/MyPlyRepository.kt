@@ -1,12 +1,7 @@
 package com.cocaine.myply.feature.data.repository
 
 import com.cocaine.myply.feature.data.datasource.remote.MyPlyService
-import com.cocaine.myply.feature.data.model.MemoInfo
-import com.cocaine.myply.feature.data.model.MemoResponse
-import com.cocaine.myply.feature.data.model.MemoUpdate
-import com.cocaine.myply.feature.data.model.UserMemoList
-import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
-import com.cocaine.myply.feature.data.model.UserNameUpdateData
+import com.cocaine.myply.feature.data.model.*
 import javax.inject.Inject
 
 class MyPlyRepository @Inject constructor(private val myPlyService: MyPlyService) {
@@ -37,4 +32,6 @@ class MyPlyRepository @Inject constructor(private val myPlyService: MyPlyService
         myPlyService.updateUserKeyword(userKeywordUpdateData)
 
     suspend fun getRecommendTags() = myPlyService.getRecommendTags()
+
+    suspend fun addMemo(youtubeId: String, body: String = "") = myPlyService.addMemo(MemoRequest(youtubeId, body))
 }

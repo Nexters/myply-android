@@ -43,4 +43,10 @@ class SearchViewModel @Inject constructor(private val usecase: SearchUsecase) : 
             }
         }
     }
+
+    fun addMemo(youtubeId: String) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            usecase.addMemo(youtubeId)
+        }
+    }
 }

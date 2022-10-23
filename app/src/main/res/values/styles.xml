@@ -132,4 +132,38 @@
         <item name="cornerSize">24dp</item>
     </style>
 
+    <style name="MyPly.Chip" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipCornerRadius">0dp</item>
+        <item name="android:textAppearance">@style/Body2_Bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="android:includeFontPadding">true</item>
+    </style>
+
+    <!-- Keep Cheep Style -->
+    <style name="MyPly.Chip.Keep" parent="MyPly.Chip">
+        <item name="chipBackgroundColor">@color/secondary_brown</item>
+        <item name="chipStrokeColor">@color/secondary_brown</item>
+    </style>
+
+    <style name="MyPly.Chip.Red" parent="MyPly.Chip">
+        <item name="chipBackgroundColor">@color/secondary_red</item>
+        <item name="chipStrokeColor">@color/secondary_red</item>
+    </style>
+
+    <style name="MyPly.Chip.Blue" parent="MyPly.Chip">
+        <item name="chipBackgroundColor">@color/secondary_blue</item>
+        <item name="chipStrokeColor">@color/secondary_blue</item>
+    </style>
+
+    <style name="MyPly.Chip.yellow" parent="MyPly.Chip">
+        <item name="chipBackgroundColor">@color/secondary_yellow</item>
+        <item name="chipStrokeColor">@color/secondary_yellow</item>
+    </style>
+
+    <style name="MyPly.Chip.green" parent="MyPly.Chip">
+        <item name="chipBackgroundColor">@color/primary_green_light</item>
+        <item name="chipStrokeColor">@color/primary_green_light</item>
+    </style>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.cocaine.myply.feature.data.datasource.remote
 
 import com.cocaine.myply.feature.data.model.MemoInfo
+import com.cocaine.myply.feature.data.model.MemoRequest
 import com.cocaine.myply.feature.data.model.MemoResponse
 import com.cocaine.myply.feature.data.model.MemoUpdate
 import com.cocaine.myply.feature.data.model.MusicResponse
@@ -14,6 +15,7 @@ import com.cocaine.myply.feature.data.model.UserNameUpdateData
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -22,7 +24,10 @@ interface MyPlyService {
     suspend fun requestRecommendTags(): SearchTagResponse
 
     @GET("musics/search")
-    suspend fun searchMusicPlayList(@Query("q") query: String, @Query("nextToken")nextPageToken: String? = null): SearchResponse
+    suspend fun searchMusicPlayList(
+        @Query("q") query: String,
+        @Query("nextToken") nextPageToken: String? = null
+    ): SearchResponse
 
     @GET("memos")
     suspend fun getUserMemos(): UserMemoList
@@ -53,4 +58,7 @@ interface MyPlyService {
 
     @GET("tags/recommend")
     suspend fun getRecommendTags(): TagResponse
+
+    @POST("memos/")
+    suspend fun addMemo(@Body body: MemoRequest): MemoResponse
 }
