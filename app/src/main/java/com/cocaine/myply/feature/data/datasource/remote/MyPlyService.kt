@@ -13,6 +13,7 @@ import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
 import com.cocaine.myply.feature.data.model.UserMemoList
 import com.cocaine.myply.feature.data.model.UserNameUpdateData
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -61,4 +62,7 @@ interface MyPlyService {
 
     @POST("memos/")
     suspend fun addMemo(@Body body: MemoRequest): MemoResponse
+
+    @DELETE("memos/{memoIdOrYoutubeID}")
+    suspend fun deleteMemo(@Path("memoIdOrYoutubeID") memoIdOrYoutubeID: String)
 }

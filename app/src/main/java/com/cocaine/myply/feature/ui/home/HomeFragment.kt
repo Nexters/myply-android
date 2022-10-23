@@ -1,17 +1,19 @@
 package com.cocaine.myply.feature.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cocaine.myply.R
 import com.cocaine.myply.core.base.BaseFragment
 import com.cocaine.myply.databinding.FragmentHomeBinding
-import com.cocaine.myply.databinding.ToastPlaylistDeleteBinding
 import com.cocaine.myply.databinding.ToastPlaylistSaveBinding
-import com.cocaine.myply.feature.data.model.MemoState
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.cocaine.myply.feature.data.model.PlaylistOrder
+import com.cocaine.myply.feature.ui.dialog.MyPlyTwoButtonDialog
+import com.cocaine.myply.feature.ui.keep.KeepFragment.Companion.MEMO_KEY
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +23,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var playlistAdapter: PlaylistAdapter
+
+    override fun onPause() {
+        super.onPause()
+        homeViewModel.clearCreatedMemo()
+    }
 
     override fun setup() {
         setPlaylistAdapter()
@@ -53,30 +60,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.playlists.observe(viewLifecycleOwner) {
             playlistAdapter.submitList(it)
         }
-        homeViewModel.likedUpdatePlaylistId.observe(viewLifecycleOwner) { (playlistId, isLiked) ->
-            showPlaylistLikedToast(playlistId, isLiked)
-        }
-    }
-
-    private fun onLikedClick(clickedPosition: Int) {
-        homeViewModel.updatePlaylistLiked(clickedPosition)
-    }
-
-    private fun showPlaylistLikedToast(playlistId: String, isLiked: MemoState) {
-        when (isLiked) {
-            MemoState.LIKED, MemoState.FILLED -> getToastPlaylistSaveView(playlistId)
-            else -> getToastPlaylistDeleteView()
-        }?.let { toast ->
-            binding?.root?.let {
-                Snackbar.make(it, "", Snackbar.LENGTH_SHORT).apply {
-                    (view as Snackbar.SnackbarLayout).addView(toast, 0)
-                }.show()
+        homeViewModel.createdMemo.observe(viewLifecycleOwner) {
+            if (it != null) {
+                showToastPlaylistSaveView(it)
             }
         }
     }
 
-    private fun getToastPlaylistSaveView(playlistId: String): View? {
-        return DataBindingUtil.bind<ToastPlaylistSaveBinding>(
+    private fun onLikedClick(isMemoed: Boolean, youtubeVideoID: String) {
+        when (isMemoed) {
+            true -> showMemoDeleteDialog(youtubeVideoID)
+            false -> homeViewModel.createMemo(youtubeVideoID)
+        }
+    }
+
+    private fun showMemoDeleteDialog(youtubeVideoID: String) {
+        val navController = findNavController()
+        if (navController.currentDestination?.id == R.id.homeFragment) {
+            MyPlyTwoButtonDialog.setDialogContent(requireContext().getString(R.string.keep_delete_title),
+                requireContext().getString(R.string.keep_delete_body),
+                requireContext().getString(R.string.keep_delete_pos),
+                requireContext().getString(R.string.keep_delete_neg),
+                {
+                    homeViewModel.deleteMemo(youtubeVideoID)
+                    navController.popBackStack()
+                },
+                { navController.popBackStack() })
+            findNavController().navigate(R.id.myPlyTwoButtonDialog)
+        } else {
+            Toast.makeText(requireContext(), "delete memo", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showToastPlaylistSaveView(memoInfo: MemoInfo) {
+        DataBindingUtil.bind<ToastPlaylistSaveBinding>(
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.toast_playlist_save,
                 null,
@@ -84,23 +101,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             )
         )?.apply {
             this.btnMoveToKeepWrite.setOnClickListener {
-                // move to write
                 findNavController().let { controller ->
                     if (controller.currentDestination?.id == R.id.homeFragment) {
-                        controller.navigate(R.id.action_homeFragment_to_keepWriteFragment)
+                        val bundle = bundleOf(MEMO_KEY to memoInfo)
+                        controller.navigate(R.id.action_homeFragment_to_keepWriteFragment, bundle)
                     }
                 }
             }
-        }?.root
-    }
-
-    private fun getToastPlaylistDeleteView(): View? {
-        return DataBindingUtil.bind<ToastPlaylistDeleteBinding>(
-            LayoutInflater.from(requireContext()).inflate(
-                R.layout.toast_playlist_delete,
-                null,
-                false
-            )
-        )?.root
+        }?.root?.let { toast ->
+            binding?.root?.let {
+                Snackbar.make(it, "", Snackbar.LENGTH_SHORT).apply {
+                    (view as Snackbar.SnackbarLayout).addView(toast, 0)
+                }.show()
+            }
+        }
     }
 }

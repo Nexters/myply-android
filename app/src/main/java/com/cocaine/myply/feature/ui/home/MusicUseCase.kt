@@ -10,4 +10,8 @@ class MusicUseCase @Inject constructor(private val myPlyRepository: MyPlyReposit
 
     suspend fun getPreferenceMusicPlaylist(nextPageToken: String?) =
         myPlyRepository.getPreferenceMusicPlaylist(nextPageToken)
+
+    suspend fun createMemo(youtubeVideoID: String) = myPlyRepository.addMemo(youtubeVideoID)
+
+    suspend fun deleteMemo(youtubeVideoID: String) = myPlyRepository.deleteMemo(youtubeVideoID)
 }

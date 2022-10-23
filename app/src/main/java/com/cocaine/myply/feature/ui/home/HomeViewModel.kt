@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cocaine.myply.core.base.BaseViewModel
-import com.cocaine.myply.feature.data.model.MemoState
+import com.cocaine.myply.feature.data.model.MemoInfo
 import com.cocaine.myply.feature.data.model.MusicData
 import com.cocaine.myply.feature.data.model.PlaylistOrder
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +21,8 @@ class HomeViewModel @Inject constructor(private val musicUseCase: MusicUseCase) 
     private val _playlists = MutableLiveData<List<MusicData>>()
     val playlists: LiveData<List<MusicData>> = _playlists
 
-    private val _likedUpdatePlaylistId = MutableLiveData<Pair<String, MemoState>>()
-    val likedUpdatePlaylistId: LiveData<Pair<String, MemoState>> = _likedUpdatePlaylistId
+    private val _createdMemo = MutableLiveData<MemoInfo?>()
+    val createdMemo: LiveData<MemoInfo?> = _createdMemo
 
     private var _nextPageToken = MutableLiveData<String?>(null)
     val nextPageToken: LiveData<String?> = _nextPageToken
@@ -54,10 +54,34 @@ class HomeViewModel @Inject constructor(private val musicUseCase: MusicUseCase) 
         _nextPageToken.value = null
     }
 
-    fun updatePlaylistLiked(clickedPosition: Int) {
-        val clickedPlaylist = _playlists.value?.get(clickedPosition) ?: return
-        // TODO 해당 비디오의 Liked update
+    fun createMemo(youtubeVideoID: String) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val result = musicUseCase.createMemo(youtubeVideoID)
+            _createdMemo.postValue(result.data)
+            _playlists.postValue(_playlists.value?.map {
+                if (it.youtubeVideoID == youtubeVideoID) {
+                    it.copy(isMemoed = !it.isMemoed)
+                } else {
+                    it
+                }
+            }?.toList())
+        }
+    }
 
-        _likedUpdatePlaylistId.value = clickedPlaylist.youtubeVideoID to clickedPlaylist.memoState
+    fun deleteMemo(youtubeVideoID: String) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _playlists.postValue(_playlists.value?.map {
+                if (it.youtubeVideoID == youtubeVideoID) {
+                    it.copy(isMemoed = !it.isMemoed)
+                } else {
+                    it
+                }
+            }?.toList())
+            musicUseCase.deleteMemo(youtubeVideoID)
+        }
+    }
+
+    fun clearCreatedMemo() {
+        _createdMemo.value = null
     }
 }

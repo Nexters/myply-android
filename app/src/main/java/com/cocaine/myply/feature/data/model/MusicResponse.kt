@@ -14,5 +14,6 @@ data class MusicData(
     val youtubeTags: List<String>?,
     val title: String,
     val videoDeepLink: String,
-    val memoState: MemoState = MemoState.EMPTY
+    val memoState: MemoState = MemoState.EMPTY,
+    val isMemoed: Boolean
 )

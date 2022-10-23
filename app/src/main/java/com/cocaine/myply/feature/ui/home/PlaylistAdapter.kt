@@ -10,7 +10,7 @@ import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
 import com.cocaine.myply.feature.data.model.MusicData
 
-class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
+class PlaylistAdapter(private val onLikedClick: (Boolean, String) -> Unit) :
     ListAdapter<MusicData, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
 
     companion object {
@@ -29,18 +29,15 @@ class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
     }
 
     class PlaylistViewHolder(
-        private val binding: ItemPlaylistBinding,
-        private val onLikedClick: (Int) -> Unit
+        private val binding: ItemPlaylistBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.playlistHeart.setOnClickListener {
-                onLikedClick(adapterPosition)
-            }
-        }
-
-        fun bind(video: MusicData) {
+        fun bind(video: MusicData, onLikedClick: (Boolean, String) -> Unit) {
             binding.video = video
+
+            binding.playlistHeart.setOnClickListener {
+                onLikedClick(video.isMemoed, video.youtubeVideoID)
+            }
         }
     }
 
@@ -54,11 +51,11 @@ class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
                 R.layout.item_playlist,
                 parent,
                 false
-            ), onLikedClick
+            )
         )
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], onLikedClick)
     }
 }
