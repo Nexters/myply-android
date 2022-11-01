@@ -1,6 +1,7 @@
 package com.cocaine.myply.core.di
 
 import com.cocaine.myply.feature.data.repository.MyPlyRepository
+import com.cocaine.myply.feature.ui.home.MusicUseCase
 import com.cocaine.myply.feature.ui.mypage.TagUseCase
 import com.cocaine.myply.feature.ui.mypage.UserInfoUseCase
 import com.cocaine.myply.feature.ui.search.SearchUsecase
@@ -15,6 +16,9 @@ object UsecaseModule {
 
     @Provides
     fun provideSearchUsecase(rep: MyPlyRepository) = SearchUsecase(rep)
+
+    @Provides
+    fun provideMusicUseCase(myPlyRepository: MyPlyRepository) = MusicUseCase(myPlyRepository)
 
     @Provides
     fun provideUserInfoUseCase(myPlyRepository: MyPlyRepository) = UserInfoUseCase(myPlyRepository)
