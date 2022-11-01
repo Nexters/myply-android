@@ -6,8 +6,7 @@
     <data>
         <variable
             name="video"
-            type="com.cocaine.myply.feature.data.model.MusicResponse" />
-        <import type="com.cocaine.myply.feature.data.model.MemoState" />
+            type="com.cocaine.myply.feature.data.model.MusicData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:src="@{video.memoState == MemoState.EMPTY ? @drawable/ic_like_inactive : @drawable/ic_like_active}"
+            android:src="@{video.isMemoed ? @drawable/ic_like_active : @drawable/ic_like_inactive}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

@@ -1,5 +1,7 @@
 package com.cocaine.myply.feature.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,20 +10,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
-import com.cocaine.myply.feature.data.model.MusicResponse
+import com.cocaine.myply.feature.data.model.MusicData
+import com.cocaine.myply.feature.ui.search.SearchTagAdapter
 
-class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
-    ListAdapter<MusicResponse, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
+class PlaylistAdapter(private val onLikedClick: (Boolean, String) -> Unit) :
+    ListAdapter<MusicData, PlaylistAdapter.PlaylistViewHolder>(diffUtil) {
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
-            override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<MusicData>() {
+            override fun areItemsTheSame(oldItem: MusicData, newItem: MusicData): Boolean {
                 return oldItem.youtubeVideoID == newItem.youtubeVideoID
             }
 
             override fun areContentsTheSame(
-                oldItem: MusicResponse,
-                newItem: MusicResponse
+                oldItem: MusicData,
+                newItem: MusicData
             ): Boolean {
                 return oldItem == newItem
             }
@@ -29,18 +32,31 @@ class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
     }
 
     class PlaylistViewHolder(
-        private val binding: ItemPlaylistBinding,
-        private val onLikedClick: (Int) -> Unit
+        private val binding: ItemPlaylistBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.playlistHeart.setOnClickListener {
-                onLikedClick(adapterPosition)
-            }
-        }
+        private val tagAdapter = SearchTagAdapter()
 
-        fun bind(video: MusicResponse) {
+        fun bind(video: MusicData, onLikedClick: (Boolean, String) -> Unit) {
             binding.video = video
+
+            binding.playlistTags.adapter = tagAdapter
+            video.youtubeTags?.let {
+                tagAdapter.submitList(it)
+            }
+
+            binding.playlistPlayBtn.setOnClickListener {
+                kotlin.runCatching {
+                    binding.root.context.startActivity(
+                        Intent(Intent.ACTION_VIEW).setData(Uri.parse(video.videoDeepLink))
+                            .setPackage("com.google.android.youtube")
+                    )
+                }
+            }
+
+            binding.playlistHeart.setOnClickListener {
+                onLikedClick(video.isMemoed, video.youtubeVideoID)
+            }
         }
     }
 
@@ -54,11 +70,11 @@ class PlaylistAdapter(private val onLikedClick: (Int) -> Unit) :
                 R.layout.item_playlist,
                 parent,
                 false
-            ), onLikedClick
+            )
         )
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], onLikedClick)
     }
 }

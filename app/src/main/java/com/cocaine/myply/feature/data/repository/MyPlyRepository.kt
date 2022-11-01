@@ -19,15 +19,21 @@ class MyPlyRepository @Inject constructor(
 ) {
     suspend fun getRecommendKeyword() = myPlyService.requestRecommendTags()
 
-    suspend fun searchMusicPlayList(query: String, nextPageToken: String? = null) =
-        myPlyService.searchMusicPlayList(query, nextPageToken)
+    suspend fun searchMusicPlayList(query: String, nextPageToken: String? = null) = myPlyService.searchMusicPlayList(query, nextPageToken)
 
     suspend fun getUserMemoList(): UserMemoList = myPlyService.getUserMemos()
 
-    suspend fun updateMemo(memoId: String, body: MemoUpdate): MemoInfo =
-        myPlyService.updateMemo(memoId, body)
+    suspend fun updateMemo(memoId: String, body: MemoUpdate): MemoInfo = myPlyService.updateMemo(memoId, body)
 
     suspend fun getMemo(memoId: String): MemoResponse = myPlyService.getMemo(memoId)
+
+    suspend fun retrieveMusicPlayList(nextPageToken: String? = null, order: String) =
+        myPlyService.retrieveMusicPlayList(
+            nextPageToken, order
+        )
+
+    suspend fun getPreferenceMusicPlaylist(nextPageToken: String?) =
+        myPlyService.getPreferenceMusicPlaylist(nextPageToken)
 
     suspend fun getUserInfo() = myPlyService.getUserInfo()
 
@@ -43,6 +49,7 @@ class MyPlyRepository @Inject constructor(
 
     suspend fun getRecommendTags() = myPlyService.getRecommendTags()
 
-    suspend fun addMemo(youtubeId: String, body: String = "") =
-        myPlyService.addMemo(MemoRequest(youtubeId, body))
+    suspend fun addMemo(youtubeId: String, body: String = "") = myPlyService.addMemo(MemoRequest(youtubeId, body))
+
+    suspend fun deleteMemo(memoIdOrYoutubeID: String) = myPlyService.deleteMemo(memoIdOrYoutubeID)
 }

@@ -6,7 +6,7 @@
 
         <variable
             name="video"
-            type="com.cocaine.myply.feature.data.model.MusicResponse" />
+            type="com.cocaine.myply.feature.data.model.MusicData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
