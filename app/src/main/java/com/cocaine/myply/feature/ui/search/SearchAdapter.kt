@@ -11,20 +11,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cocaine.myply.R
 import com.cocaine.myply.databinding.ItemPlaylistBinding
+import com.cocaine.myply.feature.data.model.MusicData
+import com.google.android.material.chip.Chip
 import com.cocaine.myply.feature.data.model.MemoState
 import com.cocaine.myply.feature.data.model.MusicResponse
 
-class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) :
-    ListAdapter<MusicResponse, SearchAdapter.SearchViewHolder>(diffUtil) {
+class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) : ListAdapter<MusicData, SearchAdapter.SearchViewHolder>(diffUtil) {
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MusicResponse>() {
-            override fun areItemsTheSame(oldItem: MusicResponse, newItem: MusicResponse): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<MusicData>() {
+            override fun areItemsTheSame(oldItem: MusicData, newItem: MusicData): Boolean {
                 return oldItem === newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: MusicResponse,
-                newItem: MusicResponse
+                oldItem: MusicData,
+                newItem: MusicData
             ): Boolean {
                 return oldItem.youtubeVideoID == newItem.youtubeVideoID
             }
@@ -38,7 +39,7 @@ class SearchAdapter(private val getYoutubeId: (Int, String) -> Unit) :
     ) :
         RecyclerView.ViewHolder(binding.root) {
         private val adapter = SearchTagAdapter()
-        fun bind(data: MusicResponse) {
+        fun bind(data: MusicData) {
             binding.video = data
 
             binding.playlistTags.adapter = adapter

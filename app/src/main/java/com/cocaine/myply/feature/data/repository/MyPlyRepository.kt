@@ -29,6 +29,14 @@ class MyPlyRepository @Inject constructor(
 
     suspend fun getMemo(memoId: String): MemoResponse = myPlyService.getMemo(memoId)
 
+    suspend fun retrieveMusicPlayList(nextPageToken: String? = null, order: String) =
+        myPlyService.retrieveMusicPlayList(
+            nextPageToken, order
+        )
+
+    suspend fun getPreferenceMusicPlaylist(nextPageToken: String?) =
+        myPlyService.getPreferenceMusicPlaylist(nextPageToken)
+
     suspend fun getUserInfo() = myPlyService.getUserInfo()
 
     suspend fun signupUser(keywords: List<String>, nickname: String) = myPlyService.signupUser(
@@ -43,6 +51,7 @@ class MyPlyRepository @Inject constructor(
 
     suspend fun getRecommendTags() = myPlyService.getRecommendTags()
 
-    suspend fun addMemo(youtubeId: String, body: String = "") =
-        myPlyService.addMemo(MemoRequest(youtubeId, body))
+    suspend fun addMemo(youtubeId: String, body: String = "") = myPlyService.addMemo(MemoRequest(youtubeId, body))
+
+    suspend fun deleteMemo(memoIdOrYoutubeID: String) = myPlyService.deleteMemo(memoIdOrYoutubeID)
 }
