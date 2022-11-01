@@ -1,8 +1,8 @@
 package com.cocaine.myply.core.di
 
 import com.cocaine.myply.feature.data.repository.MyPlyRepository
-import com.cocaine.myply.feature.ui.home.MusicUseCase
 import com.cocaine.myply.feature.ui.home.UserUseCase
+import com.cocaine.myply.feature.ui.home.MusicUseCase
 import com.cocaine.myply.feature.ui.mypage.TagUseCase
 import com.cocaine.myply.feature.ui.mypage.UserInfoUseCase
 import com.cocaine.myply.feature.ui.onboarding.UserAuthUseCase
