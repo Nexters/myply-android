@@ -8,6 +8,7 @@ import com.cocaine.myply.feature.data.model.MusicResponse
 import com.cocaine.myply.feature.data.model.SearchResponse
 import com.cocaine.myply.feature.data.model.SearchTagResponse
 import com.cocaine.myply.feature.data.model.TagResponse
+import com.cocaine.myply.feature.data.model.UserInfoData
 import com.cocaine.myply.feature.data.model.UserInfoResponse
 import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
 import com.cocaine.myply.feature.data.model.UserMemoList
