@@ -33,7 +33,7 @@ class MyPageViewModel @Inject constructor(
 
     fun loadMyPageInfo() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            userInfoUseCase.getUserInfo().data.let { data ->
+            userInfoUseCase.getUserInfo().body()?.data?.let { data ->
                 nickname.postValue(data.name)
                 _keywords.postValue(data.keywords)
             }

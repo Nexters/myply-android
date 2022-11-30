@@ -38,16 +38,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setNavGraph(isUserRegistered: Boolean) {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
-        navHostFragment.navController.graph =
-            navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph).apply {
-                setStartDestination(
-                    when (isUserRegistered) {
-                        true -> R.id.homeFragment
-                        false -> R.id.onBoardingFragment
-                    }
-                )
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+
+        navGraph.setStartDestination(
+            when (isUserRegistered) {
+                true -> R.id.homeFragment
+                false -> R.id.onBoardingFragment
             }
+        )
+        navHostFragment.navController.graph = navGraph
     }
 
     private fun setupNavController() {

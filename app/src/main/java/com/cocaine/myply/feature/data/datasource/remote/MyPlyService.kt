@@ -13,6 +13,7 @@ import com.cocaine.myply.feature.data.model.UserInfoResponse
 import com.cocaine.myply.feature.data.model.UserKeywordUpdateData
 import com.cocaine.myply.feature.data.model.UserMemoList
 import com.cocaine.myply.feature.data.model.UserNameUpdateData
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -50,7 +51,7 @@ interface MyPlyService {
     suspend fun getPreferenceMusicPlaylist(@Query("nextToken") nextPageToken: String?): MusicResponse
 
     @GET("members")
-    suspend fun getUserInfo(): UserInfoResponse
+    suspend fun getUserInfo(): Response<UserInfoResponse>
 
     @POST("members/")
     suspend fun signupUser(@Body body: UserInfoData): UserInfoResponse

@@ -17,13 +17,12 @@ class MainViewModel @Inject constructor(private val userUseCase: UserUseCase) : 
 
     fun getUserRegisterState() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val result = userUseCase.getUserRegisterState()
-            _isUserRegistered.postValue(
-                when {
-                    result.code == 200 && result.data.name.isNotEmpty()-> true
-                    else -> false
-                }
-            )
+            val data = userUseCase.getUserRegisterState()
+            if (data.isSuccessful) {
+                _isUserRegistered.postValue(data.body()?.data?.name?.isNotEmpty())
+            } else {
+                _isUserRegistered.postValue(false)
+            }
         }
     }
 }
